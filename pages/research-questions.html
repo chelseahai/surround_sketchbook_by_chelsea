@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Questions - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-link:hover {
+            opacity: 0.8;
+        }
+        
+        .content-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .question-description {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Surround Sketchbook</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <a href="../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        <div class="page-header-content">
+            <h1>Research Questions</h1>
+            <p>Exploring fundamental inquiries that drive our research and design process</p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">01</div>
+                <div class="question-text">How can we design technology that responds to and enhances human creativity?</div>
+                <div class="question-description">
+                    This question explores the intersection of human creativity and computational systems, 
+                    examining how technology can be designed to augment rather than replace human creative processes.
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">02</div>
+                <div class="question-text">What role does context play in the effectiveness of design interventions?</div>
+                <div class="question-description">
+                    Investigating how environmental, social, and cultural contexts influence the success 
+                    and adoption of design solutions in different settings.
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">03</div>
+                <div class="question-text">How can we measure and evaluate the impact of design on human experience?</div>
+                <div class="question-description">
+                    Developing frameworks and methodologies for assessing the qualitative and quantitative 
+                    effects of design interventions on user experience and behavior.
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">04</div>
+                <div class="question-text">What are the ethical implications of AI-driven design systems?</div>
+                <div class="question-description">
+                    Examining the moral and social consequences of automated design processes, 
+                    including issues of bias, transparency, and human agency.
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">05</div>
+                <div class="question-text">How can design bridge the gap between technological innovation and human needs?</div>
+                <div class="question-description">
+                    Exploring strategies for ensuring that technological advances are accessible, 
+                    meaningful, and beneficial to diverse human populations.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Surround Sketchbook</h3>
+                    <p>Exploring the boundaries of research, design, and technology</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#sections">Sections</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Surround Sketchbook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html> 
