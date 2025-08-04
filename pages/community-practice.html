@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community of Practice - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #fff;
+            color: #000;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #000;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        .text-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            color: #000;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .community-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .community-item {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            text-align: center;
+        }
+
+        .community-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .community-date {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .community-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        .community-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: none;
+        }
+
+        .community-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .community-image {
+            text-align: center;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .community-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .community-image img {
+            max-width: 400px;
+            height: auto;
+            border: 3px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .full-width-image {
+            width: 100vw;
+            height: 80vh;
+            margin: 3rem calc(-50vw + 50%);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .full-width-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .designers-section {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        .designers-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .designer-item {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .designer-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .designer-photos {
+            display: flex;
+            gap: 0;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .designer-photo {
+            width: 300px;
+            height: 375px;
+            position: relative;
+            border: 3px solid #000;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .designer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .designer-photo:hover img {
+            filter: grayscale(0%);
+        }
+
+        .designer-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .designer-name {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .designer-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 2rem 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="computational-experiments.html" class="nav-link">Experiments</a>
+                <a href="the-challenge.html" class="nav-link">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/community-practice/05_Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Community of Practice</h1>
+            <p class="hero-subtitle">Exploring the collaborative networks and knowledge communities</p>
+        </div>
+    </section>
+
+    <!-- Text Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">The Network</h2>
+            <p class="section-text">
+                This project exists within a broader ecosystem of researchers, designers, and practitioners who are reimagining the relationship between technology, the body, and the environment. These communities span across academic institutions, design studios, research labs, and grassroots initiatives, each contributing unique perspectives and methodologies to the evolving field of adaptive, responsive design.
+            </p>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="content-section">
+        <div class="community-container">
+            <div class="community-item">
+                <div class="community-date">Academic</div>
+                <div class="community-content">
+                    <div class="community-title">Wearable Technology Lab, University of Minnesota</div>
+                    <div class="community-description">
+                        The Wearable Technology Lab (WTL) at the College of Design leads interdisciplinary research combining apparel design, e-textiles, and wearable interfaces that expand garment functionality. Founded in 2009, they explore smart fabrics, sensing systems, and wearable computation for everyday use. <a href="https://design.umn.edu/wearable-technology-lab" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-item">
+                <div class="community-date">Design</div>
+                <div class="community-content">
+                    <div class="community-title">Diffus Design, Denmark</div>
+                    <div class="community-description">
+                        Founded in 2004, Diffus Design merges sensor tech and craft to create intelligent textiles, wearables, and interactive installations. Their projects like the Climate Dress and Light.Touch.Matters bring sensor-driven fashion to real street contexts. <a href="https://diffus.dk" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-item">
+                <div class="community-date">Technology</div>
+                <div class="community-content">
+                    <div class="community-title">Hybrid Body Lab, Cornell University</div>
+                    <div class="community-description">
+                        Directed by Dr. Cindy Hsin‑Liu Kao, Hybrid Body Lab creates wearable "on-skin" interfaces, soft sensors, and inclusive tech systems that feel like extensions of the body. Their work supports socially-aware, culturally informed fabrication methods for smart futures. <a href="https://www.hybridbody.human.cornell.edu/" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-item">
+                <div class="community-date">Environmental</div>
+                <div class="community-content">
+                    <div class="community-title">texTENG, Sustainable Wearables by Makers</div>
+                    <div class="community-description">
+                        texTENG research focuses on creating triboelectric nanogenerators embedded in textile structures, turning everyday motion into power. Developed with accessible DIY methods, it offers sustainable prototypes for wearable sensing within maker communities. <a href="https://arxiv.org/abs/2503.12628" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-item">
+                <div class="community-date">Grassroots</div>
+                <div class="community-content">
+                    <div class="community-title">CRAFT at Large MakerLAB, Cornell Tech</div>
+                    <div class="community-description">
+                        CRAFT@Large is a community-based maker initiative that enshrines co-creation—inviting people from diverse backgrounds to collaborate long-term in designing technology prototypes, including wearable systems made from recycled and accessible materials. <a href="https://craftatlarge.tech.cornell.edu/" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-item">
+                <div class="community-date">Governance</div>
+                <div class="community-content">
+                    <div class="community-title">Ethical Dilemmas in Wearable Tech, Deloitte Insights</div>
+                    <div class="community-description">
+                        This report examines the multifaceted challenges wearable tech faces today—covering data privacy, algorithmic bias, environmental impact, and user transparency. It highlights the need for a holistic ethical framework across design, deployment, and regulation. <a href="https://www.deloitte.com/us/en/insights/industry/technology/ethical-dilemmas-in-technology.html" target="_blank" style="color: #000; text-decoration: underline;">View Their Work</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Designers Section -->
+    <section class="designers-section">
+        <div class="designers-container">
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_audrey.webp" alt="Natsai Audrey Chieza">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_audrey.webp" alt="Natsai Audrey Chieza">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_audrey.webp" alt="Natsai Audrey Chieza">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Natsai Audrey Chieza</h3>
+                    <p class="designer-description">Natsai Audrey Chieza pioneers the use of biological systems to develop sustainable dyes and materials. Through her studio Faber Futures, she bridges design, science, and ecology to envision a regenerative future for fashion. <a href="https://faberfutures.com/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_behnaz.jpeg" alt="Behnaz Farahi">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_behnaz.jpeg" alt="Behnaz Farahi">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_behnaz.jpeg" alt="Behnaz Farahi">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Behnaz Farahi</h3>
+                    <p class="designer-description">Behnaz Farahi designs interactive garments and installations that react to gaze, movement, and emotion. Her work blends architecture, fashion, and AI-driven systems to explore the relationship between the body and its environment. <a href="https://behnazfarahi.com/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Brit.avif" alt="Brit Shaked">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Brit.avif" alt="Brit Shaked">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Brit.avif" alt="Brit Shaked">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Brit Shaked</h3>
+                    <p class="designer-description">Brit Shaked is a fashion technologist working at the intersection of craft and computation. Her practice focuses on developing responsive textiles and interactive garments that explore new materialities in fashion. <a href="https://www.britshaked.com/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Iris.jpg" alt="Iris van Herpen">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Iris.jpg" alt="Iris van Herpen">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Iris.jpg" alt="Iris van Herpen">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Iris van Herpen</h3>
+                    <p class="designer-description">Iris van Herpen is known for pushing the boundaries of couture through digital fabrication and computational design. Her collections merge art, science, and technology, featuring intricate forms created using 3D printing and generative algorithms. <a href="https://www.irisvanherpen.com/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Ying.jpg" alt="Ying Gao">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Ying.jpg" alt="Ying Gao">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_Ying.jpg" alt="Ying Gao">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Ying Gao</h3>
+                    <p class="designer-description">Ying Gao creates garments that respond to environmental stimuli like light, sound, and human interaction. Her designs combine textiles, electronics, and pneumatics to transform clothing into dynamic, sensory experiences. <a href="http://yinggao.ca/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+
+            <div class="designer-item">
+                <div class="designer-photos">
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_pauline.png" alt="Pauline van Dongen">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_pauline.png" alt="Pauline van Dongen">
+                    </div>
+                    <div class="designer-photo">
+                        <img src="../images/community-practice/05_pauline.png" alt="Pauline van Dongen">
+                    </div>
+                </div>
+                <div class="designer-intro">
+                    <h3 class="designer-name">Pauline van Dongen</h3>
+                    <p class="designer-description">Pauline van Dongen explores how technology can integrate into everyday fashion in meaningful, wearable ways. Her work often incorporates solar panels and environmental sensors into garments, emphasizing sustainability and practical innovation. <a href="https://www.paulinevandongen.nl/" target="_blank" style="color: #000; text-decoration: underline;">View Her Work</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chelsea's Point of View Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">Chelsea's Point of View</h2>
+            <p class="section-text">
+                I view design as an active mediator between individuals and their environments. It is not simply about form, but about creating systems that respond to change and enable agency. The practices featured here show that design is never static; it responds, negotiates, and evolves. My work continues this dialogue by using computation, material intelligence, and environmental data to imagine objects that live with us. These objects are adaptive, sensitive, and deeply human.
+            </p>
+        </div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/community-practice/05_Community.png" alt="Community of Practice">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'community-practice.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.image-section, .community-item, .designer-item');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html> 

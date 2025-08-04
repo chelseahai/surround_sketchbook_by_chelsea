@@ -176,7 +176,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 300;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     letter-spacing: 2px;
     color: white;
@@ -238,7 +237,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 300;
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     letter-spacing: 2px;
     color: white;

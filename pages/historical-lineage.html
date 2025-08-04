@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Lineage - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #000;
+            color: white;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: white;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background: #000;
+        }
+
+        .text-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            text-align: center;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-date {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .timeline-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: none;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-image {
+            text-align: center;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-image img {
+            max-width: 235px;
+            height: auto;
+            border: 3px solid #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .wiener-image img {
+            max-width: 675px;
+        }
+
+        .oxman-image img {
+            max-width: 600px;
+        }
+
+        .full-width-image {
+            width: 100vw;
+            height: 80vh;
+            margin: 3rem calc(-50vw + 50%);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .full-width-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .image-title {
+                font-size: 2rem;
+            }
+
+            .timeline-content {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="computational-design.html" class="nav-link">Experiments</a>
+                <a href="challenge.html" class="nav-link">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/historical-lineage/04_Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Historical Lineage</h1>
+            <p class="hero-subtitle">Tracing the evolution and historical context of our research domain</p>
+        </div>
+    </section>
+
+
+
+    <!-- Timeline Section -->
+    <section class="content-section">
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-date">1948</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Cybernetic Design: Norbert Wiener & Adaptive Systems</div>
+                    <div class="timeline-description">
+                        Norbert Wiener, the MIT mathematician and "father of cybernetics," defined systems that self-regulate through feedback—the same kind of logic behind garments that adapt to body and environment. His 1948 book Cybernetics: Or Control and Communication in the Animal and the Machine laid the foundation for thinking machines and regulation across biology and technology. This lineage invites us to imagine clothes not as static attire but as active systems that learn and adjust in real time.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-image wiener-image">
+                <img src="../images/historical-lineage/04_wiener-cover.webp" alt="Norbert Wiener Cybernetics Cover">
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">1960s</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Responsive Architecture: Nicholas Negroponte & Cedric Price's Fun Palace</div>
+                    <div class="timeline-description">
+                        Thinkers like Nicholas Negroponte and Cedric Price pioneered architecture that could respond to users and environments. Price's Fun Palace was conceived as a modular, reconfigurable structure, and Negroponte coined the idea of "architecture machines"—environments with embedded logic and agency. These ideas directly resonate with wearable systems that shape-shift in context, treating the garment as an architectural artifact for the body.
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-width-image">
+                <img src="../images/historical-lineage/04_FunPalace.png" alt="Fun Palace">
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2000s</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Digital Garment Experiments: Hussein Chalayan</div>
+                    <div class="timeline-description">
+                        Hussein Chalayan redefined the boundaries of fashion by treating garments as kinetic sculptures. His collections in the late 1990s and early 2000s featured groundbreaking experiments like the remote-controlled dresses in Before Minus Now and the iconic Airplane Dress, which unfolded and transformed its structure in real time. These works blurred the line between fashion, technology, and performance, positioning clothing as an engineered system rather than a static object. Chalayan's vision framed garments as carriers of narrative and innovation—opening a path for fashion to become dynamic, adaptive, and conceptually architectural.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-image">
+                <img src="../images/historical-lineage/04_Chalayan.jpg" alt="Hussein Chalayan">
+            </div>
+
+
+
+            <div class="timeline-item">
+                <div class="timeline-date">2010s</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Environmental Visualization: Radical Cartography & Data Art</div>
+                    <div class="timeline-description">
+                        Radical cartography and data-driven art use mapping to make hidden systems visible—climate patterns, mobility flows, and urban inequalities. Projects like Bill Rankin's radicalcartography.net and The Tempestry Project, which translates temperature data into knit patterns, show how data can become a sensory, cultural artifact. These practices highlight how visualization turns complex environmental forces into something we can read, feel, and interpret—providing a foundation for imagining garments that carry this information onto the body.
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-width-image">
+                <img src="../images/historical-lineage/04_Tempestry.jpg" alt="The Tempestry Project">
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2019</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Climate Adaptation & Material Ecology: Neri Oxman</div>
+                    <div class="timeline-description">
+                        Neri Oxman's concept of material ecology combines biology, material science, and computation to create designs that adapt and biodegrade in harmony with natural systems. Her work envisions a future where objects, and by extension garments, are not static products but living interfaces that grow, change, and return to the environment. This approach offers both an ethical and aesthetic model for responsive design, aligning fashion with principles of sustainability and ecological resilience.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-image oxman-image">
+                <img src="../images/historical-lineage/04_Oxman.jpg" alt="Neri Oxman">
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/historical-lineage/04_Linage.png" alt="Historical Lineage">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'historical-lineage.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Timeline scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all timeline items and images
+        document.querySelectorAll('.timeline-item, .timeline-image, .full-width-image').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html> 

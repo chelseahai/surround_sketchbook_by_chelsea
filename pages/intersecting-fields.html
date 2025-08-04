@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersecting Fields - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #000;
+            color: white;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: white;
+        }
+
+        .content-section {
+            padding: 8rem 0;
+            background: #000;
+        }
+
+        .text-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .keywords-container {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .keyword {
+            position: absolute;
+            color: white;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .keyword:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .keyword:nth-child(1) {
+            font-size: 2rem;
+            top: 15%;
+            left: 20%;
+            animation-delay: 0s;
+            animation-duration: 8s;
+        }
+
+        .keyword:nth-child(2) {
+            font-size: 1.8rem;
+            top: 25%;
+            right: 25%;
+            animation-delay: 1s;
+            animation-duration: 7s;
+        }
+
+        .keyword:nth-child(3) {
+            font-size: 2.2rem;
+            bottom: 30%;
+            left: 15%;
+            animation-delay: 2s;
+            animation-duration: 9s;
+        }
+
+        .keyword:nth-child(4) {
+            font-size: 1.6rem;
+            top: 60%;
+            right: 20%;
+            animation-delay: 3s;
+            animation-duration: 6s;
+        }
+
+        .keyword:nth-child(5) {
+            font-size: 2.4rem;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+
+        .keyword:nth-child(6) {
+            font-size: 1.9rem;
+            top: 40%;
+            left: 60%;
+            animation-delay: 5s;
+            animation-duration: 8s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) translateX(8px) rotate(1deg);
+            }
+            50% {
+                transform: translateY(-8px) translateX(-12px) rotate(-0.5deg);
+            }
+            75% {
+                transform: translateY(-20px) translateX(6px) rotate(0.5deg);
+            }
+        }
+
+        /* D3-style Relational Structure */
+        .relational-container {
+            height: 100vh;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .main-field {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .main-field:hover {
+            border-color: rgba(255,255,255,0.8);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
+
+        .main-field:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .main-field:nth-child(2) {
+            top: 20%;
+            right: 20%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            animation-delay: 1s;
+        }
+
+        .main-field:nth-child(3) {
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            animation-delay: 2s;
+        }
+
+        .sub-field {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            animation: subPulse 4s ease-in-out infinite;
+        }
+
+        .sub-field:hover {
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        /* Computational Design sub-fields */
+        .sub-field:nth-child(4) {
+            top: 35%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .sub-field:nth-child(5) {
+            top: 45%;
+            left: 18%;
+            animation-delay: 1s;
+        }
+
+        .sub-field:nth-child(6) {
+            top: 55%;
+            left: 15%;
+            animation-delay: 1.5s;
+        }
+
+        /* Fashion Technology sub-fields */
+        .sub-field:nth-child(7) {
+            top: 35%;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .sub-field:nth-child(8) {
+            top: 45%;
+            right: 18%;
+            animation-delay: 1s;
+        }
+
+        .sub-field:nth-child(9) {
+            top: 55%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        /* Urban Environmental Data sub-fields */
+        .sub-field:nth-child(10) {
+            bottom: 45%;
+            left: 45%;
+            animation-delay: 0.5s;
+        }
+
+        .sub-field:nth-child(11) {
+            bottom: 55%;
+            left: 55%;
+            transform: translateX(-50%);
+            animation-delay: 1s;
+        }
+
+        .sub-field:nth-child(12) {
+            bottom: 45%;
+            right: 35%;
+            animation-delay: 1.5s;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: flow 3s ease-in-out infinite;
+        }
+
+        .connection-line:nth-child(13) {
+            top: 30%;
+            left: 25%;
+            width: 30%;
+            transform: rotate(15deg);
+            animation-delay: 0s;
+        }
+
+        .connection-line:nth-child(14) {
+            top: 30%;
+            right: 25%;
+            width: 30%;
+            transform: rotate(-15deg);
+            animation-delay: 0.5s;
+        }
+
+        .connection-line:nth-child(15) {
+            bottom: 30%;
+            left: 35%;
+            width: 30%;
+            transform: rotate(15deg);
+            animation-delay: 1s;
+        }
+
+
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(255,255,255,0.2);
+            }
+        }
+
+        @keyframes subPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.02);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes flow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleX(0.8);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scaleX(1.2);
+            }
+        }
+
+
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .image-title {
+                font-size: 2rem;
+            }
+
+            .keywords-container {
+                height: 60vh;
+            }
+
+            .keyword {
+                font-size: 1.2rem !important;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="computational-design.html" class="nav-link">Experiments</a>
+                <a href="challenge.html" class="nav-link">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/intersecting-fields/03_Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Intersecting Fields</h1>
+            <p class="hero-subtitle">Examining the convergence of multiple disciplines and methodologies</p>
+        </div>
+    </section>
+
+    <!-- Text Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">The Convergence</h2>
+            <p class="section-text">
+                This project brings together three worlds: computational design, fashion technology, and urban environmental data. It looks at how clothes can respond to real surrounding conditions, like weather, movement, and city systems, using algorithms. The goal is to imagine garments that aren't just worn, but lives in between our surrounds and us.
+            </p>
+        </div>
+    </section>
+
+    <!-- Keywords Section -->
+    <section class="content-section">
+        <div class="keywords-container">
+            <div class="keyword">Computational Design</div>
+            <div class="keyword">Environmental Adaptation</div>
+            <div class="keyword">Wearable Systems</div>
+            <div class="keyword">Geospatial Interfaces</div>
+            <div class="keyword">Responsive Fashion</div>
+            <div class="keyword">Data-Driven Aesthetics</div>
+        </div>
+    </section>
+
+    <!-- Relational Structure Section -->
+    <section class="relational-container">
+        <!-- Main Fields -->
+        <div class="main-field">Computational<br>Design</div>
+        <div class="main-field">Fashion<br>Technology</div>
+        <div class="main-field">Urban Environmental<br>Data</div>
+        
+        <!-- Sub-fields -->
+        <div class="sub-field">Algorithmic<br>Processes</div>
+        <div class="sub-field">Parametric<br>Interfaces</div>
+        <div class="sub-field">Responsive<br>Systems</div>
+        
+        <div class="sub-field">Wearables</div>
+        <div class="sub-field">Soft<br>Robotics</div>
+        <div class="sub-field">Material<br>Systems</div>
+        
+        <div class="sub-field">Geospatial<br>Visualization</div>
+        <div class="sub-field">Climate-Responsive<br>Systems</div>
+        <div class="sub-field">Smart<br>Mobility</div>
+        
+        <!-- Connection Lines -->
+        <div class="connection-line"></div>
+        <div class="connection-line"></div>
+        <div class="connection-line"></div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/intersecting-fields/03_Fields.png" alt="Intersecting Fields">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'intersecting-fields.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all keywords
+        document.querySelectorAll('.keyword').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html> 

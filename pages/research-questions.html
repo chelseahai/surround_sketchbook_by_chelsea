@@ -8,193 +8,386 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #000;
             color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
         }
-        
-        .page-header::before {
-            content: '';
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        
-        .page-header-content {
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
             position: relative;
             z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
         }
-        
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
             transition: opacity 0.3s ease;
+            position: relative;
         }
-        
-        .back-link:hover {
-            opacity: 0.8;
+
+        .nav-link:hover {
+            opacity: 0.7;
         }
-        
-        .content-section {
-            padding: 80px 0;
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
             background: white;
         }
-        
-        .question-card {
-            background: #f8f9fa;
-            padding: 2rem;
+
+        .content-section {
+            padding: 8rem 0;
+            background: #000;
+        }
+
+        .text-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             margin-bottom: 2rem;
-            border-left: 4px solid #667eea;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .question-item {
+            text-align: left;
+            padding: 2rem;
+            border-left: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
         }
-        
-        .question-card:hover {
+
+        .question-item:hover {
+            border-left-color: rgba(255,255,255,0.6);
             transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .question-number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #667eea;
+            font-size: 1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
             margin-bottom: 1rem;
         }
-        
+
         .question-text {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1.4;
             margin-bottom: 1rem;
-            color: #333;
         }
-        
+
         .question-description {
-            color: #666;
+            font-size: 0.95rem;
+            font-weight: 300;
             line-height: 1.6;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .image-title {
+                font-size: 2rem;
+            }
+
+            .question-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
         }
     </style>
 </head>
-<body>
+<body class="page-container">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <h2>Surround Sketchbook</h2>
-            </div>
             <div class="nav-menu">
                 <a href="../index.html" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="computational-design.html" class="nav-link">Experiments</a>
+                <a href="challenge.html" class="nav-link">Challenge</a>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <header class="page-header">
-        <a href="../index.html" class="back-link">
-            <i class="fas fa-arrow-left"></i>
-            Back to Home
-        </a>
-        <div class="page-header-content">
-            <h1>Research Questions</h1>
-            <p>Exploring fundamental inquiries that drive our research and design process</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/research-questions/02_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Research Questions</h1>
+            <p class="hero-subtitle">Exploring fundamental inquiries that drive our research and design process</p>
         </div>
-    </header>
+    </section>
 
-    <!-- Content Section -->
+    <!-- Text Section -->
     <section class="content-section">
-        <div class="container">
-            <div class="question-card">
+        <div class="text-section">
+            <h2 class="section-title">The Foundation</h2>
+            <p class="section-text">
+                What happens when your garment options stops being static and starts listening—to the day, to the city, but mostly to you? These questions explore garments as living systems: shaping comfort through data, and rethinking fashion beyond consumption, and define meanings as a layer between the world and you.
+            </p>
+        </div>
+    </section>
+
+
+
+    <!-- Questions Grid -->
+    <section class="content-section">
+        <div class="question-grid">
+            <div class="question-item">
                 <div class="question-number">01</div>
-                <div class="question-text">How can we design technology that responds to and enhances human creativity?</div>
+                <div class="question-text">How can computational design mediate the relationship between environmental conditions and the body through adaptive garments?</div>
                 <div class="question-description">
-                    This question explores the intersection of human creativity and computational systems, 
-                    examining how technology can be designed to augment rather than replace human creative processes.
+                    This question explores the role of algorithmic logic in shaping garments that respond dynamically to changing climates and bodily states. It raises the idea of clothing as an interface—an active mediator rather than a passive layer—blurring the line between fashion, technology, and environmental adaptation.
                 </div>
             </div>
 
-            <div class="question-card">
+            <div class="question-item">
                 <div class="question-number">02</div>
-                <div class="question-text">What role does context play in the effectiveness of design interventions?</div>
+                <div class="question-text">Can real-time environmental and bodily data inform decision-making processes in dressing and movement planning?</div>
                 <div class="question-description">
-                    Investigating how environmental, social, and cultural contexts influence the success 
-                    and adoption of design solutions in different settings.
+                    Here, the focus shifts to temporal immediacy: what happens when our clothes—and the systems behind them—respond not to forecasts but to lived, moment-to-moment conditions? It questions whether dressing could evolve from a static choice to a dynamic negotiation guided by sensory and contextual feedback loops.
                 </div>
             </div>
 
-            <div class="question-card">
+            <div class="question-item">
                 <div class="question-number">03</div>
-                <div class="question-text">How can we measure and evaluate the impact of design on human experience?</div>
+                <div class="question-text">What ethical questions arise when personal and geospatial data are used to inform intimate daily practices?</div>
                 <div class="question-description">
-                    Developing frameworks and methodologies for assessing the qualitative and quantitative 
-                    effects of design interventions on user experience and behavior.
+                    Embedding adaptive logic into fashion introduces surveillance-adjacent concerns: whose data is processed, who owns it, and how visible should it be? This question foregrounds the tension between personalization and privacy when computational systems enter the realm of intimate, bodily experience.
                 </div>
             </div>
 
-            <div class="question-card">
+            <div class="question-item">
                 <div class="question-number">04</div>
-                <div class="question-text">What are the ethical implications of AI-driven design systems?</div>
+                <div class="question-text">How might adaptive wearables contribute to resilience in increasingly volatile urban environments shaped by climate change?</div>
                 <div class="question-description">
-                    Examining the moral and social consequences of automated design processes, 
-                    including issues of bias, transparency, and human agency.
+                    This inquiry situates adaptive garments within the larger framework of climate resilience, asking whether clothing can become infrastructure. It reflects on fashion not as ornament but as a survival strategy—a personal-scale response to systemic environmental volatility.
                 </div>
             </div>
 
-            <div class="question-card">
+            <div class="question-item">
                 <div class="question-number">05</div>
-                <div class="question-text">How can design bridge the gap between technological innovation and human needs?</div>
+                <div class="question-text">Could this framework challenge fast fashion by prioritizing adaptive, multi-scenario garments over static consumption?</div>
                 <div class="question-description">
-                    Exploring strategies for ensuring that technological advances are accessible, 
-                    meaningful, and beneficial to diverse human populations.
+                    This question critiques the dominant cycles of fashion by introducing adaptability as a counter-narrative to disposability. It asks whether garments that morph across contexts could disrupt trend-driven consumption and propose an alternative model for sustainable luxury.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Surround Sketchbook</h3>
-                    <p>Exploring the boundaries of research, design, and technology</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../index.html#sections">Sections</a></li>
-                        <li><a href="#about">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Surround Sketchbook. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/research-questions/02_ResearchQuestions_.png" alt="Future of Design">
+    </section>
 
-    <script src="../script.js"></script>
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'research-questions.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all question items
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
 </body>
 </html> 
