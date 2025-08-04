@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situated Technology - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #000;
+            color: white;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: white;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background: #000;
+        }
+
+        .text-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .technology-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .technology-item {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            text-align: center;
+        }
+
+        .technology-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .technology-date {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .technology-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        .technology-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: none;
+        }
+
+        .technology-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .technology-image {
+            text-align: center;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .technology-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .technology-image img {
+            max-width: 400px;
+            height: auto;
+            border: 3px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .full-width-image {
+            width: 100vw;
+            height: 80vh;
+            margin: 3rem calc(-50vw + 50%);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .full-width-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 2rem 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="computational-experiments.html" class="nav-link">Experiments</a>
+                <a href="the-challenge.html" class="nav-link">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/situated-technology/06_Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Situated Technology</h1>
+            <p class="hero-subtitle">Exploring technology embedded in context and place</p>
+        </div>
+    </section>
+
+    <!-- Text Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">The Context</h2>
+            <p class="section-text">
+                Technology is never neutral—it exists within specific contexts, shaped by the environments, cultures, and bodies it serves. Situated technology recognizes that the most meaningful innovations emerge from deep understanding of place, context, and human experience. This approach challenges us to think beyond universal solutions and instead create technologies that are responsive to their specific situations.
+            </p>
+        </div>
+    </section>
+
+    <!-- Question Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">What is your orientation to the Computational Design Practices theme?</h2>
+        </div>
+    </section>
+
+    <!-- Note Image Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <img src="../images/situated-technology/06_note3.png" alt="Note" style="max-width: 80%; height: auto; margin: 2rem 0;">
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="content-section">
+        <div class="technology-container">
+            <div class="technology-item">
+                <div class="technology-date">Context</div>
+                <div class="technology-content">
+                    <div class="technology-title">Environmental Responsiveness</div>
+                    <div class="technology-description">
+                        Technologies that adapt to their environmental context—responding to climate, geography, and local conditions. These systems learn from their surroundings and adjust their behavior accordingly, creating more resilient and appropriate solutions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-item">
+                <div class="technology-date">Culture</div>
+                <div class="technology-content">
+                    <div class="technology-title">Cultural Integration</div>
+                    <div class="technology-description">
+                        Technologies that respect and integrate with local cultural practices, values, and traditions. This approach ensures that innovations enhance rather than disrupt existing social structures and ways of knowing.
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-item">
+                <div class="technology-date">Body</div>
+                <div class="technology-content">
+                    <div class="technology-title">Embodied Interaction</div>
+                    <div class="technology-description">
+                        Technologies that understand and respond to the body's specific needs, movements, and limitations. These systems create more intuitive and accessible interactions that feel natural and supportive.
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-item">
+                <div class="technology-date">Place</div>
+                <div class="technology-content">
+                    <div class="technology-title">Place-Based Design</div>
+                    <div class="technology-description">
+                        Technologies that emerge from and serve specific places, understanding the unique characteristics, histories, and needs of particular locations and communities.
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-item">
+                <div class="technology-date">Time</div>
+                <div class="technology-content">
+                    <div class="technology-title">Temporal Adaptation</div>
+                    <div class="technology-description">
+                        Technologies that respond to temporal rhythms—daily cycles, seasonal changes, and long-term transformations. These systems understand that context is not static but constantly evolving.
+                    </div>
+                </div>
+            </div>
+
+            <div class="technology-item">
+                <div class="technology-date">Scale</div>
+                <div class="technology-content">
+                    <div class="technology-title">Multi-Scalar Systems</div>
+                    <div class="technology-description">
+                        Technologies that operate across multiple scales—from the intimate scale of the body to the global scale of environmental systems—creating connections between local and global contexts.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Note Image After Scale Section -->
+            <div class="technology-item">
+                <div class="technology-content">
+                    <img src="../images/situated-technology/06_note4.png" alt="Note" style="max-width: 100%; height: auto; margin: 2rem 0;">
+                </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="technology-item">
+                <div class="technology-content">
+                    <div class="technology-description" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                        This project sits in conversation with computational fashion and critical design practices but leans toward practical application, tools for navigating unpredictable urban life. It asks how clothing can become a living system, one that transforms our relationship to climate, technology, and space, quietly, elegantly, and with intent.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/situated-technology/06_tech.png" alt="Situated Technology">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'situated-technology.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.image-section, .technology-item');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html> 

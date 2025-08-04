@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles following Chanel format */
+        .page-container {
+            background: #fff;
+            color: #000;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+            color: #000;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+            color: #000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #000;
+        }
+
+        .content-section {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        .text-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            color: #000;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 3rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .image-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .methods-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .method-item {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            text-align: center;
+        }
+
+        .method-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .method-date {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .method-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        .method-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: none;
+        }
+
+        .method-description {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .method-image {
+            text-align: center;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .method-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .method-image img {
+            max-width: 400px;
+            height: auto;
+            border: 3px solid #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .full-width-image {
+            width: 100vw;
+            height: 80vh;
+            margin: 3rem calc(-50vw + 50%);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .full-width-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 2rem 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="page-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="the-challenge.html" class="nav-link">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/methods/07_Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Methods</h1>
+            <p class="hero-subtitle">Exploring the methodologies and approaches</p>
+        </div>
+    </section>
+
+    <!-- Text Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">The Approach</h2>
+            <p class="section-text">
+                Our research methodology combines computational design, material experimentation, and human-centered inquiry to develop adaptive systems that respond to environmental and bodily contexts. These methods bridge traditional craft practices with emerging technologies, creating new possibilities for responsive, sustainable design.
+            </p>
+        </div>
+    </section>
+
+    <!-- Methods Section -->
+    <section class="content-section">
+        <div class="methods-container">
+            <div class="method-item">
+                <div class="method-date">Research</div>
+                <div class="method-content">
+                    <div class="method-title">Computational Design</div>
+                    <div class="method-description">
+                        Using algorithmic processes and parametric modeling to generate responsive forms and systems. This approach enables the creation of complex geometries and adaptive behaviors that respond to environmental and user inputs.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Material</div>
+                <div class="method-content">
+                    <div class="method-title">Smart Materials</div>
+                    <div class="method-description">
+                        Experimenting with materials that change properties in response to environmental stimuli—temperature, humidity, light, or mechanical stress. These materials become active components in responsive systems.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Sensing</div>
+                <div class="method-content">
+                    <div class="method-title">Environmental Sensing</div>
+                    <div class="method-description">
+                        Integrating sensors to monitor environmental conditions and user states, creating feedback loops that inform adaptive responses. This method enables real-time interaction between systems and their contexts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Prototyping</div>
+                <div class="method-content">
+                    <div class="method-title">Iterative Development</div>
+                    <div class="method-description">
+                        Rapid prototyping and testing cycles that allow for continuous refinement of responsive systems. This approach emphasizes learning through making and user feedback.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Integration</div>
+                <div class="method-content">
+                    <div class="method-title">System Integration</div>
+                    <div class="method-description">
+                        Combining computational systems, material properties, and environmental data to create cohesive adaptive experiences. This method ensures that all components work together harmoniously.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Evaluation</div>
+                <div class="method-content">
+                    <div class="method-title">Performance Assessment</div>
+                    <div class="method-description">
+                        Evaluating the effectiveness of adaptive systems through user studies, environmental testing, and performance metrics. This method ensures that designs meet their intended goals and user needs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiments Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">Computational Design Experiments</h2>
+            <p class="section-text">
+                Our experimental work explores the boundaries of computational design, material intelligence, and environmental responsiveness. These experiments serve as both research probes and practical demonstrations of adaptive systems in action.
+            </p>
+        </div>
+    </section>
+
+    <!-- Experiments Container -->
+    <section class="content-section">
+        <div class="methods-container">
+            <div class="method-item">
+                <div class="method-date">Experiment 1</div>
+                <div class="method-content">
+                    <div class="method-title">Responsive Textile Systems</div>
+                    <div class="method-description">
+                        Developing textiles that respond to environmental conditions through embedded sensors and actuators. These experiments explore how fabric can become an active interface between the body and its surroundings.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Experiment 2</div>
+                <div class="method-content">
+                    <div class="method-title">Computational Pattern Generation</div>
+                    <div class="method-description">
+                        Using algorithmic processes to generate adaptive patterns that respond to environmental data. These experiments bridge digital design and physical fabrication to create dynamic, responsive surfaces.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Experiment 3</div>
+                <div class="method-content">
+                    <div class="method-title">Environmental Data Visualization</div>
+                    <div class="method-description">
+                        Transforming environmental data into visual and tactile experiences through wearable interfaces. These experiments explore how data can become embodied and meaningful in everyday contexts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Experiment 4</div>
+                <div class="method-content">
+                    <div class="method-title">Adaptive Form Generation</div>
+                    <div class="method-description">
+                        Creating forms that evolve and adapt based on environmental inputs and user interactions. These experiments push the boundaries of what's possible with computational design and responsive materials.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Experiment 5</div>
+                <div class="method-content">
+                    <div class="method-title">Material Intelligence</div>
+                    <div class="method-description">
+                        Exploring materials that exhibit intelligent behaviors—changing properties, responding to stimuli, and adapting to their environment. These experiments investigate the potential for materials to become active participants in design.
+                    </div>
+                </div>
+            </div>
+
+            <div class="method-item">
+                <div class="method-date">Experiment 6</div>
+                <div class="method-content">
+                    <div class="method-title">Human-Environment Interaction</div>
+                    <div class="method-description">
+                        Designing systems that facilitate meaningful interaction between humans and their environments. These experiments explore how technology can enhance our relationship with the world around us.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/methods/07_Methods.png" alt="Methods">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'methods.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.image-section, .method-item');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html> 
