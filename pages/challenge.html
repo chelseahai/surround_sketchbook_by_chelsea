@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge - Surround Sketchbook</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Page-specific styles for light theme */
+        .page-container {
+            background: #ffffff;
+            color: #2c3e50;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4));
+            z-index: 2;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6c757d;
+            opacity: 0.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #6c757d;
+        }
+
+        .nav-link.active {
+            color: #2c3e50;
+            font-weight: 400;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #2c3e50;
+        }
+
+        .content-section {
+            padding: 8rem 0;
+            background: #ffffff;
+        }
+
+        .text-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #6c757d;
+            margin-bottom: 3rem;
+        }
+
+        .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-text {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        .image-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .image-subtitle {
+            font-size: 0.9rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6c757d;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .challenge-item {
+            text-align: left;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            background: rgba(248, 249, 250, 0.5);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .challenge-item:hover {
+            transform: translateX(10px);
+            background: rgba(248, 249, 250, 0.8);
+        }
+
+        .challenge-number {
+            font-size: 0.85rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .challenge-description {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+
+        /* Dark theme overrides for section 2 */
+        .solution-section .challenge-item {
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .solution-section .challenge-item:hover {
+            background: transparent;
+        }
+
+        .solution-section .challenge-number {
+            color: white;
+        }
+
+        .solution-section .challenge-text {
+            color: white;
+        }
+
+        .solution-section .challenge-description {
+            color: white;
+        }
+
+        .metallic-accent {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 50%, #ced4da 100%);
+            border: 1px solid rgba(206, 212, 218, 0.3);
+        }
+
+        .solution-section {
+            background: #000000;
+            color: white;
+            padding: 6rem 0;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .solution-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(206, 212, 218, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .solution-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .solution-icon {
+            font-size: 2.5rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .solution-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .solution-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .image-title {
+                font-size: 1.8rem;
+            }
+
+            .challenge-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        /* Video and Image Container Styles */
+        .video-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section 2 specific styles for dark theme and smaller image */
+        .solution-section .image-container img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Section 1 specific styles for smaller image without shadow */
+        .content-section .image-container img {
+            max-width: 720px;
+            width: 100%;
+            height: auto;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="page-container">
+
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="research-questions.html" class="nav-link">Questions</a>
+                <a href="intersecting-fields.html" class="nav-link">Fields</a>
+                <a href="historical-lineage.html" class="nav-link">Lineage</a>
+                <a href="community-practice.html" class="nav-link">Community</a>
+                <a href="situated-technology.html" class="nav-link">Technology</a>
+                <a href="methods.html" class="nav-link">Methods</a>
+                <a href="challenge.html" class="nav-link active">Challenge</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../images/challenge/07_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">The Challenge</h1>
+            <p class="hero-subtitle">Redefining the boundaries between fashion, technology, and human experience</p>
+        </div>
+    </section>
+
+    <!-- Text Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">The Core Challenge</h2>
+            <p class="section-text">
+                As Surround evolves, its greatest challenge will be balancing complexity with clarity—translating layered systems of data, material logic, and adaptive design into an experience that feels intuitive and human. It must negotiate the tension between speculative ambition and practical application, ensuring that technological depth does not overshadow the sensory and emotional qualities that make clothing meaningful. Building trust in data-driven garments, maintaining privacy, and preserving beauty within functionality will remain ongoing questions as this project moves forward.
+            </p>
+        </div>
+    </section>
+
+    <!-- Challenges Grid -->
+    <section class="content-section">
+        <div class="challenge-grid">
+            <div class="challenge-item">
+                <div class="challenge-number">1</div>
+                <div class="challenge-text">Surround as a Fashion Intelligence Tool</div>
+                <div class="challenge-description">
+                    Surround could evolve from an experimental design framework into a powerful shopping companion. Imagine using it not only to simulate garments but to make better choices in the real marketplace.
+                </div>
+                <div class="challenge-description">
+                    The idea is to build a database sourced from fashion platforms like SSENSE or Farfetch, cataloging details such as material composition, coverage, and visual style. Connected to Surround's adaptive logic, this system would allow users to filter garments based on how well they perform in specific conditions—not just by color or trend.
+                </div>
+                <div class="challenge-description">
+                    Picture this: you plan a day with fluctuating wind and mild temperatures. Instead of browsing endlessly, Surround suggests jackets that balance breathability, mobility, and aesthetic coherence. It's fashion selection grounded in climate awareness, function, and personal comfort.
+                </div>
+                <div class="challenge-description">
+                    This pathway turns Surround into a tool for responsible consumption, where style meets environmental intelligence and impulse buying gives way to purposeful design decisions.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="../images/challenge/07_1.jpg" alt="Fashion Intelligence Tool">
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="solution-section">
+        <div class="challenge-grid">
+            <div class="challenge-item">
+                <div class="challenge-number">2</div>
+                <div class="challenge-text">Surround as a Generative Wardrobe</div>
+                <div class="challenge-description">
+                    The second trajectory imagines a future without shopping at all. Instead of choosing from pre-made collections, what if your wardrobe was generated daily—unique to your body, your route, and the day's environmental conditions?
+                </div>
+                <div class="challenge-description">
+                    Surround could become the brain of a personal fabrication system, feeding its data—movement patterns, body metrics, microclimate readings—into parametric design scripts that output 3D-printable garments. Using flexible and biodegradable materials, each piece could be printed overnight, worn, and then recycled or composted.
+                </div>
+                <div class="challenge-description">
+                    Imagine waking up to a garment optimized for UV exposure and airflow, designed to move with your body through the day's forecasted heat and wind. No stock, no overproduction, no waste—just a circular, on-demand ecosystem for adaptive clothing.
+                </div>
+                <div class="challenge-description">
+                    This vision transforms fashion into something temporal, sustainable, and deeply personal. Garments become systems, and dressing becomes a design act in itself.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Video Section -->
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="../images/challenge/07_2.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Image Section -->
+        <div class="image-container">
+            <img src="../images/challenge/07_2_01.png" alt="Generative Wardrobe">
+        </div>
+    </section>
+
+    <!-- Final Image Section -->
+    <section class="image-section">
+        <img src="../images/challenge/07_challenge.png" alt="Challenge">
+    </section>
+
+    <script>
+        // Highlight current page in navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = 'challenge.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all challenge and solution items
+        document.querySelectorAll('.challenge-item, .solution-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+
+
+    </script>
+</body>
+</html> 

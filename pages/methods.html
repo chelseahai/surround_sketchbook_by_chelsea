@@ -142,6 +142,15 @@
             margin-bottom: 0;
         }
 
+        .tech-section .section-text {
+            margin-bottom: 3rem;
+        }
+
+        .section-text strong {
+            font-weight: 500;
+            color: #000;
+        }
+
         .image-section {
             height: 80vh;
             position: relative;
@@ -282,6 +291,142 @@
             object-fit: cover;
         }
 
+        /* Technology Stack Styles */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+
+        .tech-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .tech-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Data Practices Styles */
+        .data-section {
+            background: #f8f9fa;
+            padding: 6rem 0;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .data-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-title {
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+
+        .data-text {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* Narrative Grid Styles */
+        .narrative-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .narrative-text-left, .narrative-text-right {
+            text-align: left;
+        }
+
+        .narrative-text-right {
+            text-align: right;
+        }
+
+        .narrative-subtitle {
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .narrative-text {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .narrative-image {
+            text-align: center;
+        }
+
+        .narrative-image img {
+            max-width: 700px;
+            height: auto;
+        }
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -303,6 +448,16 @@
                 padding: 2rem 1rem;
             }
 
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
             .nav-menu {
                 display: none;
             }
@@ -310,6 +465,12 @@
     </style>
 </head>
 <body class="page-container">
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="../Rebooting.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -320,8 +481,8 @@
                 <a href="historical-lineage.html" class="nav-link">Lineage</a>
                 <a href="community-practice.html" class="nav-link">Community</a>
                 <a href="situated-technology.html" class="nav-link">Technology</a>
-                <a href="methods.html" class="nav-link">Methods</a>
-                <a href="the-challenge.html" class="nav-link">Challenge</a>
+                <a href="methods.html" class="nav-link active">Methods</a>
+                <a href="challenge.html" class="nav-link">Challenge</a>
             </div>
         </div>
     </nav>
@@ -333,7 +494,7 @@
         </video>
         <div class="hero-image"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Methods</h1>
+            <h1 class="hero-title">Methods and Computational Design Experiments</h1>
             <p class="hero-subtitle">Exploring the methodologies and approaches</p>
         </div>
     </section>
@@ -343,147 +504,205 @@
         <div class="text-section">
             <h2 class="section-title">The Approach</h2>
             <p class="section-text">
-                Our research methodology combines computational design, material experimentation, and human-centered inquiry to develop adaptive systems that respond to environmental and bodily contexts. These methods bridge traditional craft practices with emerging technologies, creating new possibilities for responsive, sustainable design.
+                This project combines <strong>computational design</strong> methods, real-time environmental data integration, and interactive web-based experiences. The software layer includes JavaScript frameworks (Mapbox GL, D3.js, GSAP) for geospatial visualization and motion design, along with HTML/CSS for UI structure and Three.js experiments for parametric effects. Data practices focus on pulling live environmental and mobility data from APIs, translating them into garment behavior logic.
             </p>
         </div>
     </section>
 
-    <!-- Methods Section -->
-    <section class="content-section">
-        <div class="methods-container">
-            <div class="method-item">
-                <div class="method-date">Research</div>
-                <div class="method-content">
-                    <div class="method-title">Computational Design</div>
-                    <div class="method-description">
-                        Using algorithmic processes and parametric modeling to generate responsive forms and systems. This approach enables the creation of complex geometries and adaptive behaviors that respond to environmental and user inputs.
-                    </div>
-                </div>
-            </div>
-
-            <div class="method-item">
-                <div class="method-date">Material</div>
-                <div class="method-content">
-                    <div class="method-title">Smart Materials</div>
-                    <div class="method-description">
-                        Experimenting with materials that change properties in response to environmental stimuli—temperature, humidity, light, or mechanical stress. These materials become active components in responsive systems.
-                    </div>
-                </div>
-            </div>
-
-            <div class="method-item">
-                <div class="method-date">Sensing</div>
-                <div class="method-content">
-                    <div class="method-title">Environmental Sensing</div>
-                    <div class="method-description">
-                        Integrating sensors to monitor environmental conditions and user states, creating feedback loops that inform adaptive responses. This method enables real-time interaction between systems and their contexts.
-                    </div>
-                </div>
-            </div>
-
-            <div class="method-item">
-                <div class="method-date">Prototyping</div>
-                <div class="method-content">
-                    <div class="method-title">Iterative Development</div>
-                    <div class="method-description">
-                        Rapid prototyping and testing cycles that allow for continuous refinement of responsive systems. This approach emphasizes learning through making and user feedback.
-                    </div>
-                </div>
-            </div>
-
-            <div class="method-item">
-                <div class="method-date">Integration</div>
-                <div class="method-content">
-                    <div class="method-title">System Integration</div>
-                    <div class="method-description">
-                        Combining computational systems, material properties, and environmental data to create cohesive adaptive experiences. This method ensures that all components work together harmoniously.
-                    </div>
-                </div>
-            </div>
-
-            <div class="method-item">
-                <div class="method-date">Evaluation</div>
-                <div class="method-content">
-                    <div class="method-title">Performance Assessment</div>
-                    <div class="method-description">
-                        Evaluating the effectiveness of adaptive systems through user studies, environmental testing, and performance metrics. This method ensures that designs meet their intended goals and user needs.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experiments Section -->
+    <!-- Theoretical Framework Section -->
     <section class="content-section">
         <div class="text-section">
-            <h2 class="section-title">Computational Design Experiments</h2>
+            <h2 class="section-title">Theoretical Framework</h2>
             <p class="section-text">
-                Our experimental work explores the boundaries of computational design, material intelligence, and environmental responsiveness. These experiments serve as both research probes and practical demonstrations of adaptive systems in action.
+                The theoretical approach builds on <strong>cybernetic systems</strong>, <strong>adaptive design</strong>, and <strong>body–environment mediation</strong>, paired with <strong>critical design discourse</strong> on sustainability and urban resilience. Aesthetically, the project draws from <strong>fashion editorial language</strong> merged with <strong>data-driven visualization</strong> to create a narrative that feels cinematic yet interactive.
             </p>
         </div>
     </section>
 
-    <!-- Experiments Container -->
+    <!-- Methodology Types Section -->
     <section class="content-section">
-        <div class="methods-container">
-            <div class="method-item">
-                <div class="method-date">Experiment 1</div>
-                <div class="method-content">
-                    <div class="method-title">Responsive Textile Systems</div>
-                    <div class="method-description">
-                        Developing textiles that respond to environmental conditions through embedded sensors and actuators. These experiments explore how fabric can become an active interface between the body and its surroundings.
-                    </div>
+        <div class="text-section">
+            <h2 class="section-title">Methodological Approach</h2>
+            <p class="section-text">
+                Both <strong>qualitative and quantitative methods</strong> inform the process: Qualitative through speculative design framing, narrative prototyping, and visual language exploration. Quantitative through environmental dataset analysis, algorithmic garment simulations, and user-interaction metrics.
+            </p>
+        </div>
+    </section>
+
+    <!-- Critical Components Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">Critical Components</h2>
+            <p class="section-text">
+                The most critical components are computational and aesthetic, as the project relies on real-time data and UI logic to shape a coherent visual and experiential identity. Physical and material aspects play a conceptual role, suggesting tactile futures through rendered garments rather than full prototypes for now. Written components remain essential for framing—providing context, narrative, and ethical positioning.
+            </p>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="content-section tech-section">
+        <div class="text-section">
+            <h2 class="section-title">Technology Stack</h2>
+            <p class="section-text">
+                The project leverages a combination of modern web technologies to create interactive, data-driven experiences that bridge the digital and physical realms.
+            </p>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="tech-title">Mapbox GL</div>
+                <div class="tech-text">
+                    Geospatial visualization and mapping for environmental data representation and location-based garment behavior.
                 </div>
             </div>
 
-            <div class="method-item">
-                <div class="method-date">Experiment 2</div>
-                <div class="method-content">
-                    <div class="method-title">Computational Pattern Generation</div>
-                    <div class="method-description">
-                        Using algorithmic processes to generate adaptive patterns that respond to environmental data. These experiments bridge digital design and physical fabrication to create dynamic, responsive surfaces.
-                    </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="tech-title">D3.js</div>
+                <div class="tech-text">
+                    Data visualization and dynamic charting for environmental metrics and garment performance analytics.
                 </div>
             </div>
 
-            <div class="method-item">
-                <div class="method-date">Experiment 3</div>
-                <div class="method-content">
-                    <div class="method-title">Environmental Data Visualization</div>
-                    <div class="method-description">
-                        Transforming environmental data into visual and tactile experiences through wearable interfaces. These experiments explore how data can become embodied and meaningful in everyday contexts.
-                    </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <div class="tech-title">GSAP</div>
+                <div class="tech-text">
+                    Motion design and animation for creating fluid, cinematic transitions and responsive garment movements.
                 </div>
             </div>
 
-            <div class="method-item">
-                <div class="method-date">Experiment 4</div>
-                <div class="method-content">
-                    <div class="method-title">Adaptive Form Generation</div>
-                    <div class="method-description">
-                        Creating forms that evolve and adapt based on environmental inputs and user interactions. These experiments push the boundaries of what's possible with computational design and responsive materials.
-                    </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="tech-title">Three.js</div>
+                <div class="tech-text">
+                    3D parametric effects and spatial visualization for garment form generation and environmental modeling.
                 </div>
             </div>
 
-            <div class="method-item">
-                <div class="method-date">Experiment 5</div>
-                <div class="method-content">
-                    <div class="method-title">Material Intelligence</div>
-                    <div class="method-description">
-                        Exploring materials that exhibit intelligent behaviors—changing properties, responding to stimuli, and adapting to their environment. These experiments investigate the potential for materials to become active participants in design.
-                    </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="tech-title">HTML/CSS</div>
+                <div class="tech-text">
+                    UI structure and styling for creating intuitive, responsive interfaces that adapt to user interactions.
                 </div>
             </div>
 
-            <div class="method-item">
-                <div class="method-date">Experiment 6</div>
-                <div class="method-content">
-                    <div class="method-title">Human-Environment Interaction</div>
-                    <div class="method-description">
-                        Designing systems that facilitate meaningful interaction between humans and their environments. These experiments explore how technology can enhance our relationship with the world around us.
-                    </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
                 </div>
+                <div class="tech-title">API Integration</div>
+                <div class="tech-text">
+                    Real-time environmental and mobility data feeds that inform garment behavior and adaptive responses.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Building Section -->
+    <section class="content-section">
+        <div class="text-section">
+            <h2 class="section-title">Narrative Building</h2>
+            <p class="section-text">
+                <strong>The Bedroom Metaphor</strong><br><br>
+                The bedroom is the first space of the day, the moment between rest and movement, private and public. In Surround, this space becomes a metaphor for tuning into the self before stepping into the city. Here, the system asks questions of the body: How ready are you? Do you feel warmth or stillness? Are you calm, or charged with energy?<br><br>
+                Through simple, sensory interactions—adjusting a silhouette, pressing to sense warmth, moving to gauge mental energy, the bedroom interface translates feelings into data. This is where subjective states become design input, shaping how the layer between you and the world will respond. The bedroom is not just a starting point; it is an act of authorship, letting you design your own comfort and agency before the environment begins to speak.
+            </p>
+        </div>
+    </section>
+
+    <!-- Narrative Subsection 1 -->
+    <section class="content-section">
+        <div class="narrative-grid">
+            <div class="narrative-text-left">
+                <h3 class="narrative-subtitle">Function</h3>
+                <p class="narrative-text">
+                    Captures the body's internal state—readiness, warmth, energy, and visibility intent—through interactive gestures like cursor movement, press-and-hold, and proximity.
+                </p>
+            </div>
+            <div class="narrative-image">
+                <img src="../images/narrative/001.jpg" alt="Narrative 001">
+            </div>
+            <div class="narrative-text-right">
+                <h3 class="narrative-subtitle">Narrative</h3>
+                <p class="narrative-text">
+                    The mirror is about self-awareness before engagement. It asks: How do you feel in this moment? By translating these subtle internal signals into data, the system allows the user to co-author their experience for the day. It's an intimate starting point—designing from the inside out.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Subsection 2 -->
+    <section class="content-section">
+        <div class="narrative-grid">
+            <div class="narrative-text-left">
+                <h3 class="narrative-subtitle">Function</h3>
+                <p class="narrative-text">
+                    Displays environmental conditions and route planning through live geospatial data (Mapbox + weather APIs). Visual overlays reveal sunlight intensity, wind flow, and crowd density.
+                </p>
+            </div>
+            <div class="narrative-image">
+                <img src="../images/narrative/002.jpg" alt="Narrative 002">
+            </div>
+            <div class="narrative-text-right">
+                <h3 class="narrative-subtitle">Narrative</h3>
+                <p class="narrative-text">
+                    The window is about perspective. It frames the world outside as an active system—dynamic, unpredictable, and interconnected. The act of looking through the window becomes an exploration: What's out there, and how will it shape your choices? It shifts dressing from aesthetic preference to environmental negotiation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Subsection 3 -->
+    <section class="content-section">
+        <div class="narrative-grid">
+            <div class="narrative-text-left">
+                <h3 class="narrative-subtitle">Function</h3>
+                <p class="narrative-text">
+                    Offers interactive garment logic settings without explicit labels: sliders and gestures adjust adaptability, ventilation, opacity, and layering in real time.
+                </p>
+            </div>
+            <div class="narrative-image">
+                <img src="../images/narrative/003.jpg" alt="Narrative 003">
+            </div>
+            <div class="narrative-text-right">
+                <h3 class="narrative-subtitle">Narrative</h3>
+                <p class="narrative-text">
+                    The wardrobe transforms from a static closet into a generative interface. It represents authorship and play: the ability to define not just what to wear, but how that layer will behave across scenarios. It asks: What do you want this garment to do for you today?
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Subsection 4 -->
+    <section class="content-section">
+        <div class="narrative-grid">
+            <div class="narrative-text-left">
+                <h3 class="narrative-subtitle">Function</h3>
+                <p class="narrative-text">
+                    Presents the adaptive garment's preview and confirms the system's configuration for the day. A visual summary shows how body inputs and environmental data converge in the design.
+                </p>
+            </div>
+            <div class="narrative-image">
+                <img src="../images/narrative/004.jpg" alt="Narrative 004">
+            </div>
+            <div class="narrative-text-right">
+                <h3 class="narrative-subtitle">Narrative</h3>
+                <p class="narrative-text">
+                    The door is closure: stepping out, equipped. It carries a sense of transition: from control to release, from intention to movement. It reinforces that dressing is no longer a passive ritual but an adaptive design process responding to both body and world.
+                </p>
             </div>
         </div>
     </section>
@@ -520,9 +739,11 @@
             }, observerOptions);
 
             // Observe elements for animation
-            const animatedElements = document.querySelectorAll('.image-section, .method-item');
+            const animatedElements = document.querySelectorAll('.image-section, .method-item, .tech-item, .data-item');
             animatedElements.forEach(el => observer.observe(el));
         });
+
+
     </script>
 </body>
 </html> 
