@@ -427,6 +427,287 @@
             height: auto;
         }
 
+        /* Sliders Section */
+        .sliders-section {
+            max-width: 1000px;
+            margin: 8rem auto;
+            padding: 0 2rem;
+        }
+
+        .sliders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .slider-item {
+            text-align: center;
+        }
+
+        .slider-title {
+            font-size: 0.9rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .slider-track {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #000;
+            transition: height 0.3s ease;
+        }
+
+        .slider-handle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-handle:hover {
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        /* Animated sliders - no interaction */
+        .animated-fill {
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animated-handle {
+            cursor: default;
+            transition: bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* Disable all interactions */
+        }
+
+        .animated-handle:hover {
+            transform: translateX(-50%); /* No scaling on hover */
+        }
+
+        .animated-value {
+            transition: all 0.3s ease;
+        }
+
+        /* Individual colors for environmental sliders */
+        .animated-fill[data-type="sun"] {
+            background: #ff6b35; /* Warm orange for sun */
+        }
+
+        .animated-handle[data-type="sun"] {
+            background: #ff6b35;
+        }
+
+        .animated-fill[data-type="wind"] {
+            background: #4ecdc4; /* Cool teal for wind */
+        }
+
+        .animated-handle[data-type="wind"] {
+            background: #4ecdc4;
+        }
+
+        .animated-fill[data-type="shade"] {
+            background: #6c5ce7; /* Purple for shade */
+        }
+
+        .animated-handle[data-type="shade"] {
+            background: #6c5ce7;
+        }
+
+        .animated-fill[data-type="crowd"] {
+            background: #fd79a8; /* Pink for crowd */
+        }
+
+        .animated-handle[data-type="crowd"] {
+            background: #fd79a8;
+        }
+
+        /* Environmental section layout */
+        .environmental-section {
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .environmental-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .map-container {
+            flex: 0 0 auto;
+            overflow: hidden;
+        }
+
+        .map-container img {
+            width: 300px;
+            height: auto;
+            display: block;
+            transform: scale(1.25); /* Scale up to crop 20% edges */
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .sliders-container {
+            flex: 1;
+        }
+
+        /* Update sliders grid for horizontal layout */
+        .sliders-container .sliders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 0;
+        }
+
+        /* Design image sizing */
+        .image-section img[src*="07_des.png"] {
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Remove spacing from design image section */
+        .image-section:has(img[src*="07_des.png"]) {
+            margin-bottom: 0;
+            height: auto; /* Override default 80vh height */
+            padding: 0;
+        }
+
+        .image-section:has(img[src*="07_des.png"]) img {
+            height: auto; /* Override default 100% height */
+            object-fit: contain; /* Override cover to maintain aspect ratio */
+        }
+
+        /* Visualization image sizing */
+        .vis-image-section {
+            height: auto; /* Override default 80vh height */
+            padding: 2rem 0;
+            margin-bottom: 0;
+            overflow: hidden; /* Hide cropped edges */
+        }
+
+        .vis-image-section img {
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.25); /* Scale up to crop 20% from all edges */
+        }
+
+        /* Design process images grid */
+        .design-process-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .design-images-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .design-image-item {
+            width: 50%;
+        }
+
+        .design-image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .design-image-item img:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .environmental-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .sliders-container .sliders-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .image-section img[src*="07_des.png"] {
+                max-width: 100%;
+            }
+            
+            .vis-image-section img {
+                max-width: 100%;
+            }
+            
+            .design-image-item {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .design-image-item {
+                width: 90%;
+            }
+            
+            .design-images-grid {
+                gap: 2rem;
+            }
+        }
+
+        .slider-value {
+            font-size: 0.8rem;
+            font-weight: 300;
+            margin-top: 1rem;
+            opacity: 0.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sliders-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .slider-container {
+                height: 150px;
+            }
+        }
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -483,6 +764,11 @@
                 <a href="situated-technology.html" class="nav-link">Technology</a>
                 <a href="methods.html" class="nav-link active">Methods</a>
                 <a href="challenge.html" class="nav-link">Challenge</a>
+            </div>
+            <div class="nav-controls">
+                <button id="fullscreenToggle" class="fullscreen-btn" title="Toggle Full Screen">
+                    <i class="fas fa-expand"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -644,6 +930,60 @@
         </div>
     </section>
 
+    <!-- Mirror Image Section -->
+    <section class="image-section">
+        <img src="../images/methods/07_Mirror.png" alt="Mirror Interface">
+    </section>
+
+    <!-- Interactive Sliders Section -->
+    <section class="sliders-section">
+        <div class="sliders-grid">
+            <div class="slider-item">
+                <div class="slider-title">Readiness Level</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill" style="height: 65%;"></div>
+                    </div>
+                    <div class="slider-handle" style="bottom: 65%;"></div>
+                </div>
+                <div class="slider-value">0.65</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Internal Temp</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill" style="height: 42%;"></div>
+                    </div>
+                    <div class="slider-handle" style="bottom: 42%;"></div>
+                </div>
+                <div class="slider-value">0.42</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Mental Charge</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill" style="height: 78%;"></div>
+                    </div>
+                    <div class="slider-handle" style="bottom: 78%;"></div>
+                </div>
+                <div class="slider-value">0.78</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Visibility Intent</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill" style="height: 30%;"></div>
+                    </div>
+                    <div class="slider-handle" style="bottom: 30%;"></div>
+                </div>
+                <div class="slider-value">0.30</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Narrative Subsection 2 -->
     <section class="content-section">
         <div class="narrative-grid">
@@ -661,6 +1001,67 @@
                 <p class="narrative-text">
                     The window is about perspective. It frames the world outside as an active system—dynamic, unpredictable, and interconnected. The act of looking through the window becomes an exploration: What's out there, and how will it shape your choices? It shifts dressing from aesthetic preference to environmental negotiation.
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Image Section -->
+    <section class="image-section">
+        <img src="../images/methods/07_des.png" alt="Design Interface">
+    </section>
+
+    <!-- Environmental Data Section with Map and Sliders -->
+    <section class="environmental-section">
+        <div class="environmental-container">
+            <div class="map-container">
+                <img src="../images/methods/07_Map.gif" alt="Environmental Data Map">
+            </div>
+            <div class="sliders-container">
+                <div class="sliders-grid">
+            <div class="slider-item">
+                <div class="slider-title">Sun</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill animated-fill" data-type="sun" style="height: 43%;"></div>
+                    </div>
+                    <div class="slider-handle animated-handle" data-type="sun" style="bottom: 43%;"></div>
+                </div>
+                <div class="slider-value animated-value" data-type="sun">0.43</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Wind</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill animated-fill" data-type="wind" style="height: 45%;"></div>
+                    </div>
+                    <div class="slider-handle animated-handle" data-type="wind" style="bottom: 45%;"></div>
+                </div>
+                <div class="slider-value animated-value" data-type="wind">0.45</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Shade</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill animated-fill" data-type="shade" style="height: 26%;"></div>
+                    </div>
+                    <div class="slider-handle animated-handle" data-type="shade" style="bottom: 26%;"></div>
+                </div>
+                <div class="slider-value animated-value" data-type="shade">0.26</div>
+            </div>
+            
+            <div class="slider-item">
+                <div class="slider-title">Crowd</div>
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slider-fill animated-fill" data-type="crowd" style="height: 63%;"></div>
+                    </div>
+                    <div class="slider-handle animated-handle" data-type="crowd" style="bottom: 63%;"></div>
+                </div>
+                <div class="slider-value animated-value" data-type="crowd">0.63</div>
+            </div>
+                </div>
             </div>
         </div>
     </section>
@@ -684,6 +1085,47 @@
                 </p>
             </div>
         </div>
+    </section>
+
+    <!-- Design Process Images -->
+    <section class="design-process-section">
+        <div class="design-images-grid">
+            <div class="design-image-item">
+                <img src="../images/methods/a.png" alt="Design Process A">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/b.png" alt="Design Process B">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/c.png" alt="Design Process C">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/d.png" alt="Design Process D">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/e.png" alt="Design Process E">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/f.png" alt="Design Process F">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/g.png" alt="Design Process G">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/h.png" alt="Design Process H">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/i.png" alt="Design Process I">
+            </div>
+            <div class="design-image-item">
+                <img src="../images/methods/j.png" alt="Design Process J">
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Image Section -->
+    <section class="image-section vis-image-section">
+        <img src="../images/methods/07_vis.gif" alt="Visualization Interface">
     </section>
 
     <!-- Narrative Subsection 4 -->
@@ -741,9 +1183,187 @@
             // Observe elements for animation
             const animatedElements = document.querySelectorAll('.image-section, .method-item, .tech-item, .data-item');
             animatedElements.forEach(el => observer.observe(el));
+
+            // Interactive Sliders Functionality (only for first set - manual sliders)
+            const manualSliders = document.querySelectorAll('.slider-item:not(.slider-item .animated-fill)');
+            
+            manualSliders.forEach((slider) => {
+                // Skip if this slider has animated elements
+                if (slider.querySelector('.animated-fill')) return;
+                
+                const handle = slider.querySelector('.slider-handle');
+                const fill = slider.querySelector('.slider-fill');
+                const valueDisplay = slider.querySelector('.slider-value');
+                const container = slider.querySelector('.slider-container');
+                
+                let isDragging = false;
+                
+                function updateSlider(clientY) {
+                    const rect = container.getBoundingClientRect();
+                    const containerHeight = rect.height;
+                    const y = clientY - rect.top;
+                    
+                    // Calculate percentage from bottom (0% at bottom, 100% at top)
+                    let percentage = Math.max(0, Math.min(100, ((containerHeight - y) / containerHeight) * 100));
+                    
+                    // Update visual elements
+                    fill.style.height = percentage + '%';
+                    handle.style.bottom = percentage + '%';
+                    valueDisplay.textContent = (percentage / 100).toFixed(2);
+                }
+                
+                // Mouse events
+                handle.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    e.preventDefault();
+                });
+                
+                function onMouseMove(e) {
+                    if (isDragging) {
+                        updateSlider(e.clientY);
+                    }
+                }
+                
+                function onMouseUp() {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+                
+                // Touch events for mobile
+                handle.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('touchmove', (e) => {
+                    if (isDragging) {
+                        const touch = e.touches[0];
+                        updateSlider(touch.clientY);
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('touchend', () => {
+                    isDragging = false;
+                });
+                
+                // Click on track to set value
+                container.addEventListener('click', (e) => {
+                    if (e.target === container || e.target === fill || e.target.classList.contains('slider-track')) {
+                        updateSlider(e.clientY);
+                    }
+                });
+            });
+
+            // Environmental Data Animation
+            const environmentalData = [
+                {coord: [0, 0], sun: 0.4337330824124195, wind: 0.4463340506621134, shade: 0.2617586098081216, crowd: 0.6280095062780753},
+                {coord: [0, 0], sun: 0.793908816296585, wind: 0.6480104086032875, shade: 0.7665186724102513, crowd: 0.3630916165078688},
+                {coord: [0, 0], sun: 0.7253401434985215, wind: 0.849312571896979, shade: 0.8346014867623311, crowd: 0.9343112576388997},
+                {coord: [0, 0], sun: 0.8805072139648642, wind: 0.016793374924386373, shade: 0.7867992130625752, crowd: 0.851772915183707},
+                {coord: [0, 0], sun: 0.9466152047738219, wind: 0.8116679077829061, shade: 0.17876637744408308, crowd: 0.9648214676202456},
+                {coord: [0, 0], sun: 0.9136393306998926, wind: 0.3095908539173233, shade: 0.16707784513859714, crowd: 0.9706432362889095},
+                {coord: [0, 0], sun: 0.0685846522522181, wind: 0.6347492092978145, shade: 0.15690178976139146, crowd: 0.23651703765881338},
+                {coord: [0, 0], sun: 0.7731160900079007, wind: 0.6420660453013834, shade: 0.2622591418180894, crowd: 0.386949004813675},
+                {coord: [0, 0], sun: 0.427233016793777, wind: 0.9947519232377662, shade: 0.6227148830027761, crowd: 0.17978564638985706},
+                {coord: [0, 0], sun: 0.6255641064070694, wind: 0.6140279858702913, shade: 0.5319091925614838, crowd: 0.5782558326961498},
+                {coord: [0, 0], sun: 0.0115749979544999, wind: 0.7172459519408818, shade: 0.9704921604598872, crowd: 0.10288302121977977},
+                {coord: [0, 0], sun: 0.5554531123907224, wind: 0.12493736092990171, shade: 0.590225461318405, crowd: 0.5167480766162905},
+                {coord: [0, 0], sun: 0.9477802375061967, wind: 0.3958450647733308, shade: 0.5193485110138321, crowd: 0.6240919224911753},
+                {coord: [0, 0], sun: 0.8147639984457054, wind: 0.2750898642631149, shade: 0.34670326776146576, crowd: 0.8245367769724888},
+                {coord: [0, 0], sun: 0.15385015901052057, wind: 0.9168552303473433, shade: 0.7788299371982221, crowd: 0.7609832208140487},
+                {coord: [0, 0], sun: 0.9966068242487214, wind: 0.19365764245917894, shade: 0.3331278096696447, crowd: 0.6707670462255976},
+                {coord: [0, 0], sun: 0.9304386455368945, wind: 0.19015067311521017, shade: 0.49570091091051993, crowd: 0.7429478096201154},
+                {coord: [0, 0], sun: 0.32295170202016266, wind: 0.9055338544979668, shade: 0.27059280137504516, crowd: 0.2449998390741155},
+                {coord: [0, 0], sun: 0.48078644318082664, wind: 0.390376466448357, shade: 0.1321780947855895, crowd: 0.6616202496917011},
+                {coord: [0, 0], sun: 0.39941190868195575, wind: 0.591679971708992, shade: 0.50925999279054, crowd: 0.1118555113281513},
+                {coord: [0, 0], sun: 0.15009376060431368, wind: 0.09499813738473706, shade: 0.1357369555679503, crowd: 0.3891557871571627},
+                {coord: [0, 0], sun: 0.6021723575100403, wind: 0.6900860411429294, shade: 0.13186514904272673, crowd: 0.6351107601044984},
+                {coord: [0, 0], sun: 0.8316067865582352, wind: 0.3869382243081668, shade: 0.44539186634782535, crowd: 0.19607521743936818},
+                {coord: [0, 0], sun: 0.8010658683020377, wind: 0.9516660033319148, shade: 0.9017487580055944, crowd: 0.6038951351687714}
+            ];
+
+            let currentDataIndex = 0;
+            
+            function animateEnvironmentalSliders() {
+                const data = environmentalData[currentDataIndex];
+                const types = ['sun', 'wind', 'shade', 'crowd'];
+                
+                console.log(`Animating data point ${currentDataIndex}:`, data);
+                
+                types.forEach(type => {
+                    const fill = document.querySelector(`.animated-fill[data-type="${type}"]`);
+                    const handle = document.querySelector(`.animated-handle[data-type="${type}"]`);
+                    const value = document.querySelector(`.animated-value[data-type="${type}"]`);
+                    
+                    if (fill && handle && value) {
+                        const percentage = data[type] * 100;
+                        console.log(`Setting ${type} to ${percentage}%`);
+                        
+                        // Force immediate style update
+                        fill.style.transition = 'height 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                        handle.style.transition = 'bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                        
+                        fill.style.height = percentage + '%';
+                        handle.style.bottom = percentage + '%';
+                        value.textContent = data[type].toFixed(2);
+                    } else {
+                        console.log(`Missing elements for ${type}:`, { fill, handle, value });
+                    }
+                });
+                
+                currentDataIndex = (currentDataIndex + 1) % environmentalData.length;
+            }
+            
+            // Start animation when environmental sliders are visible
+            const environmentalSections = document.querySelectorAll('.sliders-section');
+            const environmentalSection = environmentalSections[environmentalSections.length - 1]; // Get the last one (environmental)
+            
+            if (environmentalSection) {
+                console.log('Found environmental section, setting up animation...');
+                
+                const envObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            console.log('Environmental section is visible, starting animation...');
+                            // Start animation immediately
+                            animateEnvironmentalSliders();
+                            
+                            // Continue animation every 1.5 seconds for more visible changes
+                            const animationInterval = setInterval(animateEnvironmentalSliders, 1500);
+                            
+                            // Store interval to clean up later if needed
+                            environmentalSection.animationInterval = animationInterval;
+                        } else {
+                            console.log('Environmental section not visible, stopping animation...');
+                            // Stop animation when not visible
+                            if (environmentalSection.animationInterval) {
+                                clearInterval(environmentalSection.animationInterval);
+                                environmentalSection.animationInterval = null;
+                            }
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                envObserver.observe(environmentalSection);
+                
+                // Also start animation immediately for testing
+                setTimeout(() => {
+                    console.log('Starting immediate animation for testing...');
+                    animateEnvironmentalSliders();
+                    const testInterval = setInterval(animateEnvironmentalSliders, 1500);
+                    environmentalSection.testInterval = testInterval;
+                }, 1000);
+            } else {
+                console.log('Environmental section not found!');
+            }
         });
 
 
     </script>
+    <script src="../fullscreen-auto.js"></script>
 </body>
 </html> 

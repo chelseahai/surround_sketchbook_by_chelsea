@@ -185,6 +185,44 @@
             opacity: 0.8;
         }
 
+        /* Featured Question Styles */
+        .featured-question {
+            max-width: 1000px;
+            margin: 6rem auto 8rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .featured-question .question-number {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .featured-question .question-text {
+            font-size: 2.8rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 2.5rem;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .featured-question .question-description {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Remaining Questions Grid */
+
         .question-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -216,14 +254,14 @@
         }
 
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 400;
             line-height: 1.4;
             margin-bottom: 1rem;
         }
 
         .question-description {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 300;
             line-height: 1.6;
             opacity: 0.7;
@@ -277,6 +315,11 @@
                 <a href="methods.html" class="nav-link">Methods</a>
                 <a href="challenge.html" class="nav-link">Challenge</a>
             </div>
+            <div class="nav-controls">
+                <button id="fullscreenToggle" class="fullscreen-btn" title="Toggle Full Screen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -304,17 +347,20 @@
 
 
 
-    <!-- Questions Grid -->
+    <!-- Featured Question -->
+    <section class="content-section">
+        <div class="featured-question">
+            <div class="question-number">01</div>
+            <div class="question-text">How can computational design mediate the relationship between environmental conditions and the body through adaptive garments?</div>
+            <div class="question-description">
+                This question explores the role of algorithmic logic in shaping garments that respond dynamically to changing climates and bodily states. It raises the idea of clothing as an interface—an active mediator rather than a passive layer—blurring the line between fashion, technology, and environmental adaptation.
+            </div>
+        </div>
+    </section>
+
+    <!-- Remaining Questions -->
     <section class="content-section">
         <div class="question-grid">
-            <div class="question-item">
-                <div class="question-number">01</div>
-                <div class="question-text">How can computational design mediate the relationship between environmental conditions and the body through adaptive garments?</div>
-                <div class="question-description">
-                    This question explores the role of algorithmic logic in shaping garments that respond dynamically to changing climates and bodily states. It raises the idea of clothing as an interface—an active mediator rather than a passive layer—blurring the line between fashion, technology, and environmental adaptation.
-                </div>
-            </div>
-
             <div class="question-item">
                 <div class="question-number">02</div>
                 <div class="question-text">Can real-time environmental and bodily data inform decision-making processes in dressing and movement planning?</div>
@@ -390,7 +436,7 @@
             observer.observe(item);
         });
 
-
     </script>
+    <script src="../fullscreen-auto.js"></script>
 </body>
 </html> 

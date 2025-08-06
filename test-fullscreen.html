@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            font-family: Arial, sans-serif;
+            background: #1a252f;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .test-content {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem;
+        }
+        
+        button:hover {
+            background: #005999;
+        }
+        
+        #status {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>🎬 Fullscreen Test</h1>
+        <p>This page will test the fullscreen functionality.</p>
+        
+        <div id="status">
+            <strong>Status:</strong> <span id="statusText">Loading...</span>
+        </div>
+        
+        <button onclick="testFullscreen()">Manual Fullscreen Test</button>
+        <button onclick="clearStorage()">Clear Storage</button>
+        <button onclick="checkStatus()">Check Status</button>
+    </div>
+
+    <script>
+        // Clear storage on load for fresh test
+        sessionStorage.clear();
+        
+        function updateStatus(text) {
+            document.getElementById('statusText').textContent = text;
+        }
+        
+        function testFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().then(() => {
+                    updateStatus('Fullscreen activated successfully!');
+                }).catch(err => {
+                    updateStatus('Fullscreen failed: ' + err.message);
+                });
+            } else {
+                updateStatus('Fullscreen API not supported');
+            }
+        }
+        
+        function clearStorage() {
+            sessionStorage.clear();
+            localStorage.clear();
+            updateStatus('Storage cleared');
+        }
+        
+        function checkStatus() {
+            const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            const hasInteracted = sessionStorage.getItem('hasUserInteracted');
+            const userExited = sessionStorage.getItem('userExitedFullscreen');
+            
+            updateStatus(`Fullscreen: ${isFS}, Interacted: ${hasInteracted}, Exited: ${userExited}`);
+        }
+        
+        // Auto status update
+        setInterval(checkStatus, 1000);
+        
+        // Initial status
+        setTimeout(() => {
+            checkStatus();
+        }, 100);
+    </script>
+    
+    <!-- Include the fullscreen script -->
+    <script src="fullscreen-auto.js"></script>
+</body>
+</html>
