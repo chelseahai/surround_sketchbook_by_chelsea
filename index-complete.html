@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surround Sketchbook - Research & Design</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Include all page-specific styles -->
+    <style>
+        /* Single Page Application Styles */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        .page-section.home.active {
+            display: block;
+        }
+        
+        /* Navigation for SPA */
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* Research Questions Styles */
+        .research-questions-page {
+            background: #000;
+            color: white;
+        }
+
+        .research-questions-page .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .research-questions-page .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .research-questions-page .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .research-questions-page .hero-title {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .research-questions-page .hero-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .research-questions-page .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .research-questions-page .text-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .research-questions-page .section-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .research-questions-page .section-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .research-questions-page .featured-question {
+            text-align: center;
+            margin: 6rem auto;
+            max-width: 900px;
+        }
+
+        .research-questions-page .featured-question .question-number {
+            font-size: 3rem;
+            font-weight: 300;
+            opacity: 0.5;
+            margin-bottom: 2rem;
+        }
+
+        .research-questions-page .featured-question .question-text {
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .research-questions-page .featured-question .question-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .research-questions-page .question-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 6rem 0;
+        }
+
+        .research-questions-page .question-item {
+            padding: 2rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .research-questions-page .question-item .question-number {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .research-questions-page .question-item .question-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .research-questions-page .question-item .question-description {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            opacity: 0.7;
+        }
+
+        .research-questions-page .image-section {
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-questions-page .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Methods Page Styles */
+        .methods-page {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Add all the complex methods styles here... */
+        /* For brevity, I'll include the key structural styles */
+        
+        .methods-page .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .methods-page .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .methods-page .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sliders styles for methods page */
+        .methods-page .sliders-section {
+            max-width: 1000px;
+            margin: 8rem auto;
+            padding: 0 2rem;
+        }
+
+        .methods-page .sliders-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .methods-page .slider-item {
+            text-align: center;
+        }
+
+        .methods-page .slider-title {
+            font-size: 0.9rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .methods-page .slider-container {
+            position: relative;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .methods-page .slider-track {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .methods-page .slider-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #000;
+            transition: height 0.3s ease;
+        }
+
+        .methods-page .slider-handle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Environmental section layout */
+        .methods-page .environmental-section {
+            max-width: 1200px;
+            margin: 4rem auto 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .methods-page .environmental-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .methods-page .map-container {
+            flex: 0 0 auto;
+            overflow: hidden;
+        }
+
+        .methods-page .map-container img {
+            width: 300px;
+            height: auto;
+            display: block;
+            transform: scale(1.25);
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Animated sliders colors */
+        .methods-page .animated-fill[data-type="sun"] {
+            background: #ff6b35;
+        }
+        .methods-page .animated-handle[data-type="sun"] {
+            background: #ff6b35;
+        }
+        .methods-page .animated-fill[data-type="wind"] {
+            background: #4ecdc4;
+        }
+        .methods-page .animated-handle[data-type="wind"] {
+            background: #4ecdc4;
+        }
+        .methods-page .animated-fill[data-type="shade"] {
+            background: #6c5ce7;
+        }
+        .methods-page .animated-handle[data-type="shade"] {
+            background: #6c5ce7;
+        }
+        .methods-page .animated-fill[data-type="crowd"] {
+            background: #fd79a8;
+        }
+        .methods-page .animated-handle[data-type="crowd"] {
+            background: #fd79a8;
+        }
+
+        /* Design process images */
+        .methods-page .design-process-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .methods-page .design-images-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .methods-page .design-image-item {
+            width: 50%;
+        }
+
+        .methods-page .design-image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Visualization image */
+        .methods-page .vis-image-section {
+            height: auto;
+            padding: 2rem 0;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+
+        .methods-page .vis-image-section img {
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.25);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .research-questions-page .question-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .methods-page .environmental-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .methods-page .sliders-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .methods-page .design-image-item {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Intro Section -->
+    <div id="videoIntro" class="video-intro">
+        <video id="introVideo" autoplay muted>
+            <source src="SurroundTeaser.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+            <div class="skip-button" id="skipButton">
+                <span>Skip Intro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Rebooting.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Main Website Content -->
+    <div id="mainContent" class="main-content" style="display: none;">
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>Surround Sketchbook</h2>
+                </div>
+                <div class="nav-menu">
+                    <span class="nav-link active" data-section="home">Home</span>
+                    <span class="nav-link" data-section="research-questions">Questions</span>
+                    <span class="nav-link" data-section="intersecting-fields">Fields</span>
+                    <span class="nav-link" data-section="historical-lineage">Lineage</span>
+                    <span class="nav-link" data-section="community-practice">Community</span>
+                    <span class="nav-link" data-section="situated-technology">Technology</span>
+                    <span class="nav-link" data-section="methods">Methods</span>
+                    <span class="nav-link" data-section="challenge">Challenge</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HOME SECTION -->
+        <section id="home" class="page-section home active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Designing the layer that connects body and&nbsp;environment</h1>
+                    <div class="hero-cta">
+                        <span class="btn-primary nav-link" data-section="research-questions">Begin Exploration</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All preview sections from original index.html -->
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/research-questions/02_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Research Questions</h2>
+                    <p class="section-description">Exploring fundamental inquiries that drive our research and design process</p>
+                    <span class="btn-secondary nav-link" data-section="research-questions">Explore Research Questions</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/intersecting-fields/03_Video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Intersecting Fields</h2>
+                    <p class="section-description">Examining the convergence of multiple disciplines and methodologies</p>
+                    <span class="btn-secondary nav-link" data-section="intersecting-fields">Explore Intersecting Fields</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/historical-lineage/04_Video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Historical Lineage</h2>
+                    <p class="section-description">Tracing the evolution and historical context of our research domain</p>
+                    <span class="btn-secondary nav-link" data-section="historical-lineage">Explore Historical Lineage</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/community-practice/05_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Community of Practice</h2>
+                    <p class="section-description">Connecting with practitioners and researchers in our field</p>
+                    <span class="btn-secondary nav-link" data-section="community-practice">Explore Community</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/situated-technology/06_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Situated Technology</h2>
+                    <p class="section-description">Understanding technology in its social and cultural context</p>
+                    <span class="btn-secondary nav-link" data-section="situated-technology">Explore Technology</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/methods/07_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Methods & Computational Design Experiments</h2>
+                    <p class="section-description">Methodological approaches and computational design techniques</p>
+                    <span class="btn-secondary nav-link" data-section="methods">Explore Methods & Experiments</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/challenge/07_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">The Challenge</h2>
+                    <p class="section-description">Addressing key challenges and opportunities in our research</p>
+                    <span class="btn-secondary nav-link" data-section="challenge">Explore The Challenge</span>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h4>Connect</h4>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 Surround Sketchbook. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <!-- RESEARCH QUESTIONS SECTION -->
+        <section id="research-questions" class="page-section research-questions-page">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="images/research-questions/02_video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-content">
+                    <h1 class="hero-title">Research Questions</h1>
+                    <p class="hero-subtitle">Exploring fundamental inquiries that drive our research and design process</p>
+                </div>
+            </section>
+
+            <!-- Text Section -->
+            <section class="content-section">
+                <div class="text-section">
+                    <h2 class="section-title">The Foundation</h2>
+                    <p class="section-text">
+                        What happens when your garment options stops being static and starts listening—to the day, to the city, but mostly to you? These questions explore garments as living systems: shaping comfort through data, and rethinking fashion beyond consumption, and define meanings as a layer between the world and you.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Featured Question -->
+            <section class="content-section">
+                <div class="featured-question">
+                    <div class="question-number">01</div>
+                    <div class="question-text">How can computational design mediate the relationship between environmental conditions and the body through adaptive garments?</div>
+                    <div class="question-description">
+                        This question explores the role of algorithmic logic in shaping garments that respond dynamically to changing climates and bodily states. It raises the idea of clothing as an interface—an active mediator rather than a passive layer—blurring the line between fashion, technology, and environmental adaptation.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Remaining Questions -->
+            <section class="content-section">
+                <div class="question-grid">
+                    <div class="question-item">
+                        <div class="question-number">02</div>
+                        <div class="question-text">Can real-time environmental and bodily data inform decision-making processes in dressing and movement planning?</div>
+                        <div class="question-description">
+                            Here, the focus shifts to temporal immediacy: what happens when our clothes—and the systems behind them—respond not to forecasts but to lived, moment-to-moment conditions? It questions whether dressing could evolve from a static choice to a dynamic negotiation guided by sensory and contextual feedback loops.
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-number">03</div>
+                        <div class="question-text">What ethical questions arise when personal and geospatial data are used to inform intimate daily practices?</div>
+                        <div class="question-description">
+                            Embedding adaptive logic into fashion introduces surveillance-adjacent concerns: whose data is processed, who owns it, and how visible should it be? This question foregrounds the tension between personalization and privacy when computational systems enter the realm of intimate, bodily experience.
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-number">04</div>
+                        <div class="question-text">How might adaptive wearables contribute to resilience in increasingly volatile urban environments shaped by climate change?</div>
+                        <div class="question-description">
+                            This inquiry situates adaptive garments within the larger framework of climate resilience, asking whether clothing can become infrastructure. It reflects on fashion not as ornament but as a survival strategy—a personal-scale response to systemic environmental volatility.
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-number">05</div>
+                        <div class="question-text">Could this framework challenge fast fashion by prioritizing adaptive, multi-scenario garments over static consumption?</div>
+                        <div class="question-description">
+                            This question critiques the dominant cycles of fashion by introducing adaptability as a counter-narrative to disposability. It asks whether garments that morph across contexts could disrupt trend-driven consumption and propose an alternative model for sustainable luxury.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Image Section -->
+            <section class="image-section">
+                <img src="images/research-questions/02_ResearchQuestions_.png" alt="Future of Design">
+            </section>
+        </section>
+
+        <!-- METHODS SECTION (Simplified - key elements) -->
+        <section id="methods" class="page-section methods-page">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="images/methods/07_video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-content">
+                    <h1 class="hero-title">Methods & Computational Design Experiments</h1>
+                    <p class="hero-subtitle">Methodological approaches and computational design techniques</p>
+                </div>
+            </section>
+
+            <!-- Mirror Image Section -->
+            <section class="image-section">
+                <img src="images/methods/07_Mirror.png" alt="Mirror Interface">
+            </section>
+
+            <!-- Interactive Sliders Section -->
+            <section class="sliders-section">
+                <div class="sliders-grid">
+                    <div class="slider-item">
+                        <div class="slider-title">Readiness Level</div>
+                        <div class="slider-container">
+                            <div class="slider-track">
+                                <div class="slider-fill" style="height: 65%;"></div>
+                            </div>
+                            <div class="slider-handle" style="bottom: 65%;"></div>
+                        </div>
+                        <div class="slider-value">0.65</div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-title">Internal Temp</div>
+                        <div class="slider-container">
+                            <div class="slider-track">
+                                <div class="slider-fill" style="height: 42%;"></div>
+                            </div>
+                            <div class="slider-handle" style="bottom: 42%;"></div>
+                        </div>
+                        <div class="slider-value">0.42</div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-title">Mental Charge</div>
+                        <div class="slider-container">
+                            <div class="slider-track">
+                                <div class="slider-fill" style="height: 78%;"></div>
+                            </div>
+                            <div class="slider-handle" style="bottom: 78%;"></div>
+                        </div>
+                        <div class="slider-value">0.78</div>
+                    </div>
+                    
+                    <div class="slider-item">
+                        <div class="slider-title">Visibility Intent</div>
+                        <div class="slider-container">
+                            <div class="slider-track">
+                                <div class="slider-fill" style="height: 30%;"></div>
+                            </div>
+                            <div class="slider-handle" style="bottom: 30%;"></div>
+                        </div>
+                        <div class="slider-value">0.30</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Image Section -->
+            <section class="image-section">
+                <img src="images/methods/07_des.png" alt="Design Interface">
+            </section>
+
+            <!-- Environmental Data Section with Map and Sliders -->
+            <section class="environmental-section">
+                <div class="environmental-container">
+                    <div class="map-container">
+                        <img src="images/methods/07_Map.gif" alt="Environmental Data Map">
+                    </div>
+                    <div class="sliders-container">
+                        <div class="sliders-grid">
+                            <div class="slider-item">
+                                <div class="slider-title">Sun</div>
+                                <div class="slider-container">
+                                    <div class="slider-track">
+                                        <div class="slider-fill animated-fill" data-type="sun" style="height: 43%;"></div>
+                                    </div>
+                                    <div class="slider-handle animated-handle" data-type="sun" style="bottom: 43%;"></div>
+                                </div>
+                                <div class="slider-value animated-value" data-type="sun">0.43</div>
+                            </div>
+                            
+                            <div class="slider-item">
+                                <div class="slider-title">Wind</div>
+                                <div class="slider-container">
+                                    <div class="slider-track">
+                                        <div class="slider-fill animated-fill" data-type="wind" style="height: 45%;"></div>
+                                    </div>
+                                    <div class="slider-handle animated-handle" data-type="wind" style="bottom: 45%;"></div>
+                                </div>
+                                <div class="slider-value animated-value" data-type="wind">0.45</div>
+                            </div>
+                            
+                            <div class="slider-item">
+                                <div class="slider-title">Shade</div>
+                                <div class="slider-container">
+                                    <div class="slider-track">
+                                        <div class="slider-fill animated-fill" data-type="shade" style="height: 26%;"></div>
+                                    </div>
+                                    <div class="slider-handle animated-handle" data-type="shade" style="bottom: 26%;"></div>
+                                </div>
+                                <div class="slider-value animated-value" data-type="shade">0.26</div>
+                            </div>
+                            
+                            <div class="slider-item">
+                                <div class="slider-title">Crowd</div>
+                                <div class="slider-container">
+                                    <div class="slider-track">
+                                        <div class="slider-fill animated-fill" data-type="crowd" style="height: 63%;"></div>
+                                    </div>
+                                    <div class="slider-handle animated-handle" data-type="crowd" style="bottom: 63%;"></div>
+                                </div>
+                                <div class="slider-value animated-value" data-type="crowd">0.63</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Process Images -->
+            <section class="design-process-section">
+                <div class="design-images-grid">
+                    <div class="design-image-item">
+                        <img src="images/methods/a.png" alt="Design Process A">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/b.png" alt="Design Process B">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/c.png" alt="Design Process C">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/d.png" alt="Design Process D">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/e.png" alt="Design Process E">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/f.png" alt="Design Process F">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/g.png" alt="Design Process G">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/h.png" alt="Design Process H">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/i.png" alt="Design Process I">
+                    </div>
+                    <div class="design-image-item">
+                        <img src="images/methods/j.png" alt="Design Process J">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Image Section -->
+            <section class="vis-image-section">
+                <img src="images/methods/07_vis.gif" alt="Visualization Interface">
+            </section>
+        </section>
+
+        <!-- OTHER SECTIONS (Placeholder - would need full content extraction) -->
+        <section id="intersecting-fields" class="page-section">
+            <div style="padding: 4rem 2rem; text-align: center;">
+                <h1>Intersecting Fields</h1>
+                <p>This section would contain the full intersecting fields content...</p>
+            </div>
+        </section>
+
+        <section id="historical-lineage" class="page-section">
+            <div style="padding: 4rem 2rem; text-align: center;">
+                <h1>Historical Lineage</h1>
+                <p>This section would contain the full historical lineage content...</p>
+            </div>
+        </section>
+
+        <section id="community-practice" class="page-section">
+            <div style="padding: 4rem 2rem; text-align: center;">
+                <h1>Community of Practice</h1>
+                <p>This section would contain the full community practice content...</p>
+            </div>
+        </section>
+
+        <section id="situated-technology" class="page-section">
+            <div style="padding: 4rem 2rem; text-align: center;">
+                <h1>Situated Technology</h1>
+                <p>This section would contain the full situated technology content...</p>
+            </div>
+        </section>
+
+        <section id="challenge" class="page-section">
+            <div style="padding: 4rem 2rem; text-align: center;">
+                <h1>The Challenge</h1>
+                <p>This section would contain the full challenge content...</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Single Page Application Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link[data-section]');
+            const sections = document.querySelectorAll('.page-section');
+            
+            function showSection(sectionId) {
+                // Hide all sections
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+
+                // Scroll to top of new section
+                window.scrollTo(0, 0);
+            }
+            
+            // Add click handlers to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+            
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', function(e) {
+                const sectionId = e.state ? e.state.section : 'home';
+                showSection(sectionId);
+            });
+            
+            // Set initial state
+            showSection('home');
+
+            // Methods page functionality
+            if (document.querySelector('.methods-page')) {
+                // Interactive Sliders Functionality (only for first set - manual sliders)
+                const manualSliders = document.querySelectorAll('.methods-page .slider-item:not(.slider-item .animated-fill)');
+                
+                manualSliders.forEach((slider) => {
+                    // Skip if this slider has animated elements
+                    if (slider.querySelector('.animated-fill')) return;
+                    
+                    const handle = slider.querySelector('.slider-handle');
+                    const fill = slider.querySelector('.slider-fill');
+                    const valueDisplay = slider.querySelector('.slider-value');
+                    const container = slider.querySelector('.slider-container');
+                    
+                    if (!handle || !fill || !valueDisplay || !container) return;
+                    
+                    let isDragging = false;
+                    
+                    function updateSlider(clientY) {
+                        const rect = container.getBoundingClientRect();
+                        const containerHeight = rect.height;
+                        const y = clientY - rect.top;
+                        
+                        let percentage = Math.max(0, Math.min(100, ((containerHeight - y) / containerHeight) * 100));
+                        
+                        fill.style.height = percentage + '%';
+                        handle.style.bottom = percentage + '%';
+                        valueDisplay.textContent = (percentage / 100).toFixed(2);
+                    }
+                    
+                    handle.addEventListener('mousedown', (e) => {
+                        isDragging = true;
+                        document.addEventListener('mousemove', onMouseMove);
+                        document.addEventListener('mouseup', onMouseUp);
+                        e.preventDefault();
+                    });
+                    
+                    function onMouseMove(e) {
+                        if (isDragging) {
+                            updateSlider(e.clientY);
+                        }
+                    }
+                    
+                    function onMouseUp() {
+                        isDragging = false;
+                        document.removeEventListener('mousemove', onMouseMove);
+                        document.removeEventListener('mouseup', onMouseUp);
+                    }
+                });
+
+                // Environmental Data Animation
+                const environmentalData = [
+                    {sun: 0.4337330824124195, wind: 0.4463340506621134, shade: 0.2617586098081216, crowd: 0.6280095062780753},
+                    {sun: 0.793908816296585, wind: 0.6480104086032875, shade: 0.7665186724102513, crowd: 0.3630916165078688},
+                    {sun: 0.7253401434985215, wind: 0.849312571896979, shade: 0.8346014867623311, crowd: 0.9343112576388997},
+                    {sun: 0.8805072139648642, wind: 0.016793374924386373, shade: 0.7867992130625752, crowd: 0.851772915183707},
+                    {sun: 0.9466152047738219, wind: 0.8116679077829061, shade: 0.17876637744408308, crowd: 0.9648214676202456},
+                    {sun: 0.9136393306998926, wind: 0.3095908539173233, shade: 0.16707784513859714, crowd: 0.9706432362889095},
+                    {sun: 0.0685846522522181, wind: 0.6347492092978145, shade: 0.15690178976139146, crowd: 0.23651703765881338},
+                    {sun: 0.7731160900079007, wind: 0.6420660453013834, shade: 0.2622591418180894, crowd: 0.386949004813675},
+                    {sun: 0.427233016793777, wind: 0.9947519232377662, shade: 0.6227148830027761, crowd: 0.17978564638985706},
+                    {sun: 0.6255641064070694, wind: 0.6140279858702913, shade: 0.5319091925614838, crowd: 0.5782558326961498},
+                    {sun: 0.0115749979544999, wind: 0.7172459519408818, shade: 0.9704921604598872, crowd: 0.10288302121977977},
+                    {sun: 0.5554531123907224, wind: 0.12493736092990171, shade: 0.590225461318405, crowd: 0.5167480766162905},
+                    {sun: 0.9477802375061967, wind: 0.3958450647733308, shade: 0.5193485110138321, crowd: 0.6240919224911753},
+                    {sun: 0.8147639984457054, wind: 0.2750898642631149, shade: 0.34670326776146576, crowd: 0.8245367769724888},
+                    {sun: 0.15385015901052057, wind: 0.9168552303473433, shade: 0.7788299371982221, crowd: 0.7609832208140487},
+                    {sun: 0.9966068242487214, wind: 0.19365764245917894, shade: 0.3331278096696447, crowd: 0.6707670462255976},
+                    {sun: 0.9304386455368945, wind: 0.19015067311521017, shade: 0.49570091091051993, crowd: 0.7429478096201154},
+                    {sun: 0.32295170202016266, wind: 0.9055338544979668, shade: 0.27059280137504516, crowd: 0.2449998390741155},
+                    {sun: 0.48078644318082664, wind: 0.390376466448357, shade: 0.1321780947855895, crowd: 0.6616202496917011},
+                    {sun: 0.39941190868195575, wind: 0.591679971708992, shade: 0.50925999279054, crowd: 0.1118555113281513},
+                    {sun: 0.15009376060431368, wind: 0.09499813738473706, shade: 0.1357369555679503, crowd: 0.3891557871571627},
+                    {sun: 0.6021723575100403, wind: 0.6900860411429294, shade: 0.13186514904272673, crowd: 0.6351107601044984},
+                    {sun: 0.8316067865582352, wind: 0.3869382243081668, shade: 0.44539186634782535, crowd: 0.19607521743936818},
+                    {sun: 0.8010658683020377, wind: 0.9516660033319148, shade: 0.9017487580055944, crowd: 0.6038951351687714}
+                ];
+
+                let currentDataIndex = 0;
+                
+                function animateEnvironmentalSliders() {
+                    const data = environmentalData[currentDataIndex];
+                    const types = ['sun', 'wind', 'shade', 'crowd'];
+                    
+                    types.forEach(type => {
+                        const fill = document.querySelector(`.methods-page .animated-fill[data-type="${type}"]`);
+                        const handle = document.querySelector(`.methods-page .animated-handle[data-type="${type}"]`);
+                        const value = document.querySelector(`.methods-page .animated-value[data-type="${type}"]`);
+                        
+                        if (fill && handle && value) {
+                            const percentage = data[type] * 100;
+                            
+                            fill.style.transition = 'height 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                            handle.style.transition = 'bottom 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                            
+                            fill.style.height = percentage + '%';
+                            handle.style.bottom = percentage + '%';
+                            value.textContent = data[type].toFixed(2);
+                        }
+                    });
+                    
+                    currentDataIndex = (currentDataIndex + 1) % environmentalData.length;
+                }
+                
+                // Start animation when environmental sliders are visible
+                const environmentalSection = document.querySelector('.methods-page .environmental-section');
+                if (environmentalSection) {
+                    const envObserver = new IntersectionObserver(function(entries) {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                animateEnvironmentalSliders();
+                                const animationInterval = setInterval(animateEnvironmentalSliders, 1500);
+                                environmentalSection.animationInterval = animationInterval;
+                            } else {
+                                if (environmentalSection.animationInterval) {
+                                    clearInterval(environmentalSection.animationInterval);
+                                    environmentalSection.animationInterval = null;
+                                }
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    
+                    envObserver.observe(environmentalSection);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

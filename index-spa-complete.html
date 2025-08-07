@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surround Sketchbook - Research & Design</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Single Page Application Base Styles */
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        .page-section.home.active {
+            display: block;
+        }
+        
+        /* Navigation for SPA */
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Intro Section -->
+    <div id="videoIntro" class="video-intro">
+        <video id="introVideo" autoplay muted>
+            <source src="SurroundTeaser.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+            <div class="skip-button" id="skipButton">
+                <span>Skip Intro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Rebooting.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Main Website Content -->
+    <div id="mainContent" class="main-content" style="display: none;">
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>Surround Sketchbook</h2>
+                </div>
+                <div class="nav-menu">
+                    <span class="nav-link active" data-section="home">Home</span>
+                    <span class="nav-link" data-section="research-questions">Questions</span>
+                    <span class="nav-link" data-section="intersecting-fields">Fields</span>
+                    <span class="nav-link" data-section="historical-lineage">Lineage</span>
+                    <span class="nav-link" data-section="community-practice">Community</span>
+                    <span class="nav-link" data-section="situated-technology">Technology</span>
+                    <span class="nav-link" data-section="methods">Methods</span>
+                    <span class="nav-link" data-section="challenge">Challenge</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HOME SECTION -->
+        <section id="home" class="page-section home active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Designing the layer that connects body and&nbsp;environment</h1>
+                    <div class="hero-cta">
+                        <span class="btn-primary nav-link" data-section="research-questions">Begin Exploration</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All original preview sections -->
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/research-questions/02_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Research Questions</h2>
+                    <p class="section-description">Exploring fundamental inquiries that drive our research and design process</p>
+                    <span class="btn-secondary nav-link" data-section="research-questions">Explore Research Questions</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/intersecting-fields/03_Video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Intersecting Fields</h2>
+                    <p class="section-description">Examining the convergence of multiple disciplines and methodologies</p>
+                    <span class="btn-secondary nav-link" data-section="intersecting-fields">Explore Intersecting Fields</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/historical-lineage/04_Video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Historical Lineage</h2>
+                    <p class="section-description">Tracing the evolution and historical context of our research domain</p>
+                    <span class="btn-secondary nav-link" data-section="historical-lineage">Explore Historical Lineage</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/community-practice/05_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Community of Practice</h2>
+                    <p class="section-description">Connecting with practitioners and researchers in our field</p>
+                    <span class="btn-secondary nav-link" data-section="community-practice">Explore Community</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/situated-technology/06_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Situated Technology</h2>
+                    <p class="section-description">Understanding technology in its social and cultural context</p>
+                    <span class="btn-secondary nav-link" data-section="situated-technology">Explore Technology</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/methods/07_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">Methods & Computational Design Experiments</h2>
+                    <p class="section-description">Methodological approaches and computational design techniques</p>
+                    <span class="btn-secondary nav-link" data-section="methods">Explore Methods & Experiments</span>
+                </div>
+            </section>
+
+            <section class="fullscreen-section">
+                <video class="section-video" autoplay muted loop playsinline>
+                    <source src="images/challenge/07_video.mp4" type="video/mp4">
+                </video>
+                <div class="section-overlay"></div>
+                <div class="section-content">
+                    <h2 class="section-title">The Challenge</h2>
+                    <p class="section-description">Addressing key challenges and opportunities in our research</p>
+                    <span class="btn-secondary nav-link" data-section="challenge">Explore The Challenge</span>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h4>Connect</h4>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 Surround Sketchbook. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <!-- All individual page sections will be loaded here dynamically -->
+        <div id="dynamic-content"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Page content mapping - each page's full HTML will be loaded dynamically
+        const pageMapping = {
+            'research-questions': 'pages/research-questions.html',
+            'intersecting-fields': 'pages/intersecting-fields.html',
+            'historical-lineage': 'pages/historical-lineage.html',
+            'community-practice': 'pages/community-practice.html',
+            'situated-technology': 'pages/situated-technology.html',
+            'methods': 'pages/methods.html',
+            'challenge': 'pages/challenge.html'
+        };
+
+        // Track loaded pages to avoid re-loading
+        const loadedPages = new Set();
+
+        // Single Page Application Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link[data-section]');
+            const dynamicContent = document.getElementById('dynamic-content');
+            const homeSection = document.getElementById('home');
+            
+            async function loadPageContent(sectionId) {
+                if (sectionId === 'home' || loadedPages.has(sectionId)) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(pageMapping[sectionId]);
+                    const html = await response.text();
+                    
+                    // Parse the HTML to extract the body content
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Get the body content, excluding navigation and scripts
+                    const bodyContent = doc.body.innerHTML;
+                    
+                    // Clean up the content - remove navigation and scripts
+                    let cleanContent = bodyContent
+                        .replace(/<nav[\s\S]*?<\/nav>/g, '')
+                        .replace(/<script[\s\S]*?<\/script>/g, '');
+                    
+                    // Fix image paths
+                    cleanContent = cleanContent.replace(/\.\.\/images\//g, 'images/');
+                    
+                    // Create section element with page-specific class
+                    const sectionElement = document.createElement('section');
+                    sectionElement.id = sectionId;
+                    sectionElement.className = `page-section ${sectionId}-page`;
+                    sectionElement.innerHTML = cleanContent;
+                    
+                    // Add page-specific styles from the original file
+                    const styles = doc.querySelector('style');
+                    if (styles) {
+                        const styleElement = document.createElement('style');
+                        // Scope the styles to the page section
+                        let scopedStyles = styles.innerHTML;
+                        scopedStyles = scopedStyles.replace(/\.page-container/g, `.${sectionId}-page`);
+                        styleElement.innerHTML = scopedStyles;
+                        document.head.appendChild(styleElement);
+                    }
+                    
+                    dynamicContent.appendChild(sectionElement);
+                    loadedPages.add(sectionId);
+                    
+                    // Execute any inline scripts for this page
+                    const scripts = doc.querySelectorAll('script');
+                    scripts.forEach(script => {
+                        if (script.innerHTML.trim()) {
+                            const newScript = document.createElement('script');
+                            newScript.innerHTML = script.innerHTML;
+                            document.body.appendChild(newScript);
+                        }
+                    });
+                    
+                } catch (error) {
+                    console.error(`Failed to load ${sectionId}:`, error);
+                }
+            }
+            
+            function showSection(sectionId) {
+                // Hide home section
+                homeSection.classList.remove('active');
+                
+                // Hide all dynamic sections
+                const allSections = dynamicContent.querySelectorAll('.page-section');
+                allSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (sectionId === 'home') {
+                    homeSection.classList.add('active');
+                } else {
+                    // Load and show target section
+                    loadPageContent(sectionId).then(() => {
+                        const targetSection = document.getElementById(sectionId);
+                        if (targetSection) {
+                            targetSection.classList.add('active');
+                        }
+                    });
+                }
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+            
+            // Add click handlers to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+            
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', function(e) {
+                const sectionId = e.state ? e.state.section : 'home';
+                showSection(sectionId);
+            });
+            
+            // Set initial state
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
